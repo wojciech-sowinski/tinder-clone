@@ -5,7 +5,8 @@ const LoginForm = () => {
 
     const initialLoginFormState = {
         login:"",
-        password:""
+        password:"",
+        info:""
     }
 
     const [loginFormData,setLoginFormData]=useState(initialLoginFormState)
@@ -30,9 +31,12 @@ const LoginForm = () => {
 
 
     return ( 
-        
+      
         <>
         <form id="login-form">
+            <div>
+                <h2>Log In to your account</h2>
+            </div>
             <div className="input-div">
                 <input 
                     type="email" 
@@ -59,6 +63,9 @@ const LoginForm = () => {
                     value="Log In" 
                     name="login-submit"
                     id="login-submit-input"/>
+            </div>
+            <div>
+                <h2>{loginFormData.info}</h2>
             </div>
 
         </form>

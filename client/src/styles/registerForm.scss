@@ -1,5 +1,4 @@
-#login-form {
-
+#register-form {
     display: flex;
     flex-direction: column;
     max-width: 300px;
@@ -16,14 +15,6 @@
             transition: .2s;
             padding: 0 10px;
             outline: none;
-
-            &:not([value=""])~span {
-                top: -20px;
-                transition: .2s;
-                color: rgb(255, 0, 0);
-            }
-
-
 
             &:not([value=""])~span {
                 top: -20px;
