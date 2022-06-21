@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
+import LoginButton from '../components/LoginButton'
 
 const Footer = () => {
 
@@ -20,6 +21,7 @@ const Footer = () => {
             <button onClick={login}>login modal</button>
             <button onClick={register}>register modal</button>
             <button onClick={hide}>hide modal</button>
+            <LoginButton/>
         </footer>
      );
 }

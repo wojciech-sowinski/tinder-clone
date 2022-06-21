@@ -1,24 +1,41 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
 import '../styles/loginForm.scss'
+import config from '../config'
+
+
+
 
 const LoginForm = () => {
 
     const initialLoginFormState = {
-        login:"",
+        email:"",
         password:"",
         info:""
     }
 
     const [loginFormData,setLoginFormData]=useState(initialLoginFormState)
 
+
+    const {showModal,formType} =useSelector(state=>state.modalReducer)
+    const {userData} = useSelector(state=>state.userData)
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch({type:'isLogged'})
+        
+    },[])
+
     const inputLoginHandle=(e)=>{
         setLoginFormData(prev=>{
             return {
                 ...prev,
-                login: e.target.value
+                email: e.target.value
             }
         })
     }
+
+
     const inputPasswordHandle=(e)=>{
         setLoginFormData(prev=>{
             return {
@@ -28,12 +45,38 @@ const LoginForm = () => {
         })
     }
 
+    const submitHandle=(e)=>{
+
+        const {email,password,info} = loginFormData
+                
+
+        e.preventDefault()
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ email,password})
+        };
+
+        fetch(config.serverUrl+'login',requestOptions)
+            .then(response=>{
+                if(!response.ok){
+                    throw new Error('register data send error')
+                }
+                return response.json()
+            })
+            .then(data=>{
+               console.log(data,'data from fetch');
+               dispatch({type:"setUserData",payload:data})
+                })
+
+    }
 
 
     return ( 
       
         <>
-        <form id="login-form">
+        <form onSubmit={submitHandle} id="login-form">
             <div>
                 <h2>Log In to your account</h2>
             </div>
@@ -43,7 +86,7 @@ const LoginForm = () => {
                     required
                     name="login-email"
                     id="login-email-input"
-                    value={loginFormData.login}
+                    value={loginFormData.email}
                     onChange={inputLoginHandle}/>
                 <span>Email</span>
             </div>

@@ -18,7 +18,7 @@
             outline: none;
 
             &:not([value=""])~span {
-                top: -20px;
+                top: -15px;
                 transition: .2s;
                 color: rgb(255, 0, 0);
             }
@@ -26,19 +26,19 @@
 
 
             &:not([value=""])~span {
-                top: -20px;
+                top: -15px;
                 transition: .2s;
                 color: rgb(255, 0, 0);
             }
 
             &:focus~span {
-                top: -20px;
+                top: -15px;
                 transition: .2s;
                 color: rgb(0, 101, 141);
             }
 
             &:valid~span {
-                top: -20px;
+                top: -15px;
                 transition: .2s;
                 color: rgb(0, 141, 24);
             }
@@ -55,8 +55,9 @@
 
         span {
             position: absolute;
-            top: 0px;
+            top: 50%;
             left: 15px;
+            transform: translateY(-50%);
             padding: 0 5px;
 
             pointer-events: none;

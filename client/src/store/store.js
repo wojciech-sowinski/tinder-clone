@@ -1,10 +1,13 @@
 import {
     createStore,
-    useMiddleware
+    applyMiddleware
 } from 'redux'
 import rootReducer from '../reducers/rootReducer'
+import isLoggedMiddleware from './middleware'
 
-const store = createStore(rootReducer)
+const middleware = applyMiddleware(isLoggedMiddleware)
+
+const store = createStore(rootReducer, middleware)
 
 
 export default store
