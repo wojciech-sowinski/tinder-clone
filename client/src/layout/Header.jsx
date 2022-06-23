@@ -1,7 +1,10 @@
+import MainNav from '../components/MainNav'
+
 const Header = () => {
     return ( 
         <header>
-            <h1>this is header</h1>
+            <MainNav/>
+           
         </header>
      );
 }

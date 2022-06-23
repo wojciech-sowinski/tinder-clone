@@ -35,7 +35,7 @@ app.use(cookieSession({
 
 
 app.post('/register', (req, res) => {
-
+    console.log(req.body);
     const userExistsFind = User.findOne({
         email: req.body.email
     })
@@ -63,7 +63,7 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
 
-    console.log(req.body);
+
     const {
         email,
         password
@@ -74,10 +74,12 @@ app.post('/login', (req, res) => {
         password
     })
     userExistsFind.exec((err, data) => {
+
         if (err) {
             console.log('login user search error', err);
         }
         if (data) {
+
 
             req.session.authToken = data.id
 
@@ -87,10 +89,7 @@ app.post('/login', (req, res) => {
 
             req.session = null
 
-            res.json({
-
-                logged: false
-            })
+            res.redirect('/islogged')
         }
     })
 
@@ -109,7 +108,8 @@ app.get('/islogged', (req, res) => {
             interest: 1,
             aboutMe: 1,
             email: 1,
-            matches: 1
+            matches: 1,
+            birthDate: 1
         }, (err, data) => {
             if (err) {
                 console.log('get user data failed');

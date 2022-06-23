@@ -8,32 +8,35 @@ const initialState = {
 
 
 const userData = (state = initialState, action) => {
+
+    console.log(action);
     switch (action.type) {
 
         case 'setUserData':
             return action.payload;
 
         case 'isLogged':
+            if (action.payload.logged) {
+                return action.payload
+            } else {
+                return initialState
+            }
+            case 'logOut':
 
+                const requestOptions = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                };
 
+                fetch(config.serverUrl + "logout", requestOptions)
 
-            return action.payload
-        case 'logOut':
+                return initialState
 
-            const requestOptions = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            };
-
-            fetch(config.serverUrl + "logout", requestOptions)
-
-            return initialState
-
-        default:
-            return state;
+            default:
+                return state;
     }
 }
 

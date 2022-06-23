@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import '../styles/loginForm.scss'
 import config from '../config'
+import RegisterButton from './RegisterButton';
 
 
 
@@ -23,7 +24,7 @@ const LoginForm = () => {
 
     useEffect(()=>{
         dispatch({type:'isLogged'})
-        
+
     },[])
 
     const inputLoginHandle=(e)=>{
@@ -47,10 +48,9 @@ const LoginForm = () => {
 
     const submitHandle=(e)=>{
 
+        e.preventDefault()
         const {email,password,info} = loginFormData
                 
-
-        e.preventDefault()
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -105,11 +105,17 @@ const LoginForm = () => {
                     type="submit" 
                     value="Log In" 
                     name="login-submit"
-                    id="login-submit-input"/>
+                    id="login-submit-input"
+                    className='login-button'/>
             </div>
-            <div>
+            {!loginFormData.info==='' ? (<div>
                 <h2>{loginFormData.info}</h2>
+            </div>) : ''}
+            <div>
+                <h4>Don't have Account? Create New.</h4>
             </div>
+                <RegisterButton/>
+            
 
         </form>
         

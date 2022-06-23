@@ -32,6 +32,10 @@ const isLoggedMiddleware = store => next => action => {
                         return next(action)
                     } else {
                         // action.type = "showLoginForm";
+                        action.payload = {
+                            logged: false,
+                            userData: {}
+                        }
                         return next(action)
                     }
                 })

@@ -32,7 +32,8 @@ const LoginButton = () => {
                     value={logged ? "Log Out" : "Log In"} 
                     name="login-submit"
                     id="login-submit-input"
-                    onClick={onClickHandle}/>
+                    onClick={onClickHandle}
+                    className="login-button"/>
         </div>
     </> );
 }
