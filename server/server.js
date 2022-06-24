@@ -281,3 +281,23 @@ app.post('/msg', (req, res) => {
 
     }
 })
+
+app.post('/msgdisplayed', (req, res) => {
+
+
+    if (req.session.authToken) {
+        if (req.body.msgId) {
+
+            Message.findByIdAndUpdate(req.body.msgId, {
+                displayed: true
+            }).exec((err, result) => {
+
+            })
+
+        }
+
+    }
+    console.log();
+
+
+})

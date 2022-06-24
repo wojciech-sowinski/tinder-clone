@@ -126,6 +126,23 @@ const isLoggedMiddleware = store => next => action => {
 
 
             break;
+        case 'msgDisplayed':
+
+            fetch(config.serverUrl + 'msgdisplayed', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    msgId: action.payload
+                })
+            })
+
+            next(action)
+
+            break;
+
         default:
             return next(action)
 

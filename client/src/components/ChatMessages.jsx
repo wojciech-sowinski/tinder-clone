@@ -36,8 +36,17 @@ const ChatMessages = ({activeMatch}) => {
         
         return msgs.map((message,index)=>{
          
-            const {from,to,created,body} = message
-            return <Message key={message._id} from={from} to={to} created={created} body={body} last={(index)==msgs.length-1 ? true : false}/>
+            const {from,to,created,body,displayed,_id} = message
+            
+            return <Message 
+                        key={_id} 
+                        from={from} 
+                        to={to} 
+                        created={created} 
+                        body={body} 
+                        displayed={displayed} 
+                        msgId={_id} 
+                        last={(index)==msgs.length-1 ? true : false}/>
         })
 
     }

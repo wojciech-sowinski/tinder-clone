@@ -6,6 +6,18 @@ const messages = (state = [], action) => {
             return action.payload;
         case 'sendMessage':
             return [...state, action.payload]
+        case 'msgDisplayed':
+
+
+            return state.map(msg => {
+
+                if (msg._id === action.payload) {
+                    msg.displayed = true
+                    return msg
+                } else {
+                    return msg
+                }
+            })
 
         default:
             return state;

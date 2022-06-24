@@ -13,7 +13,15 @@ const ChatMatches = ({setActiveMatch,setOption}) => {
 
     const matchMessageCounter =(fromId)=>{
 
-        return messages.filter(message=>message.from===fromId).length
+        const messageCounter = messages.filter(message=>message.from===fromId && !message.displayed).length
+
+        if(messageCounter){
+            return (
+                <span className='match-new-messages'>{messageCounter}</span>
+            )
+        }else{
+            return null
+        }
 
     }
 
@@ -28,7 +36,8 @@ const ChatMatches = ({setActiveMatch,setOption}) => {
                     <img className='match-thumb-img'  onClick={()=>{
                         setActiveMatch(match)
                         setOption('chat')}} src={users[users.findIndex((user)=> match===user._id)].imgUrl} alt="" />
-                    <span className='match-new-messages'>{matchMessageCounter(match)}</span>
+                   
+                    {matchMessageCounter(match)}
                     <span className='match-first-name'>{users[users.findIndex((user)=> match===user._id)].firstName}</span>
                 </div>
             )
