@@ -15,7 +15,7 @@ const RegisterForm = () => {
     const [registerFormData,setRegisterFormData]=useState(initialRegisterFormState)
 
     const {showModal,formType} = useSelector(state=>state.modalReducer)
-    const userData = useSelector(state=>state.userData)
+    const {userData,logged} = useSelector(state=>state.userData)
     const dispatch = useDispatch()
 
 

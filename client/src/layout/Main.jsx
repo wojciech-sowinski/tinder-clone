@@ -9,6 +9,7 @@ import {
 import HomePage from '../pages/HomePage'
 import DashboardPage from '../pages/DashboardPage'
 import OnBoardPage from '../pages/OnBoardPage'
+import '../styles/main.scss'
 
 const Main = () => {
     return ( <main>

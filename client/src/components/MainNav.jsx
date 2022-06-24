@@ -3,13 +3,14 @@ import { useSelector,useDispatch } from 'react-redux'
 import LoginButton from './LoginButton'
 import { NavLink } from "react-router-dom";
 import '../styles/mainNav.scss'
+import NewMessagesCounter from './newMessageCounter';
 
 
 const MainNav = () => {
 
 
     const {showModal,formType} =useSelector(state=>state.modalReducer)
-    const {userData} =useSelector(state=>state.userData)
+    const {userData,logged} =useSelector(state=>state.userData)
     const dispatch = useDispatch()
 
     
@@ -38,6 +39,9 @@ const MainNav = () => {
                     </NavLink>    
                 </li>
             </ul>
+            <div>
+                <NewMessagesCounter/>
+            </div>
             <div className='login-button-container'>
               <LoginButton/>
             </div>

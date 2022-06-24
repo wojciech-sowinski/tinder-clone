@@ -7,7 +7,7 @@ import '../styles/LoginRegisterModal.scss'
 const LoginRegisterModal = () => {
 
     const {showModal,formType} = useSelector(state=>state.modalReducer)
-    const userData = useSelector(state=>state.userData)
+    const {userData,logged} = useSelector(state=>state.userData)
     const dispatch = useDispatch()
 
     const showForm=()=>{
@@ -28,7 +28,7 @@ const LoginRegisterModal = () => {
 
     return ( 
         <>
-        {userData.logged ? '' : ( <div className="login-register-modal">
+        {logged ? '' : ( <div className="login-register-modal">
             <div>
             {showForm()}
             </div>

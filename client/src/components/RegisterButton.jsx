@@ -16,8 +16,7 @@ const RegisterButton = () => {
     }
 
     return ( <>
-        
-        <div className="input-div">
+        {logged ? '' : (<div className="input-div">
                 <input 
                     type="submit" 
                     value='Create Account'
@@ -25,7 +24,8 @@ const RegisterButton = () => {
                     id="register-submit-input"
                     onClick={onClickHandle}
                     className="register-button"/>
-        </div>
+        </div>)}
+        
     </> );
 }
  

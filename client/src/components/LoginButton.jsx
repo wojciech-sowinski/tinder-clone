@@ -11,8 +11,10 @@ const LoginButton = () => {
 
 
     useEffect(()=>{
-        dispatch({type:'isLogged'})
-    },[])
+        // dispatch({type:'isLogged'})
+
+
+    },[[logged]])
 
 
     const onClickHandle =(e)=>{

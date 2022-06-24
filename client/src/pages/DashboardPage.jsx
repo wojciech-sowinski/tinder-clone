@@ -2,7 +2,10 @@
 // import SwipeContainer from "../components/SwipeContainer";
 import { useEffect } from "react";
 import { useSelector,useDispatch } from 'react-redux'
-// import LogInInfo from "../components/LoginInfo";
+import LogInInfo from "../components/LoginInfo";
+import SwipeContainer from '../components/SwipeContainer'
+import ChatContainer from '../components/ChatContainer'
+import '../styles/dashboardPage.scss'
 
 
 const DashboardPage = () => {
@@ -12,16 +15,16 @@ const DashboardPage = () => {
 
     useEffect(()=>{
      
-        dispatch({type:'isLogged'})
+        // dispatch({type:'isLogged'})
 
     
     },[])
 
     return ( 
         <div className="dashboard-page">    
-{/* 
+
          {!logged ? <LogInInfo/> :  <SwipeContainer/>} 
-         {!logged ? <LogInInfo/> :  <ChatContainer/>}  */}
+         {!logged ? <LogInInfo/> :  <ChatContainer/>} 
             
         </div>
      );

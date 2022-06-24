@@ -3,12 +3,13 @@ import { useSelector,useDispatch } from 'react-redux'
 import LogInInfo from "../components/LoginInfo";
 import blankImg from '../img/blank-profile-picture.png'
 import '../styles/onBoardPage.scss'
+import config from "../config";
 
 
 const OnBoardPage = () => {
 
     
-    const userData = useSelector(state=>state.userData)
+    const {userData,logged} = useSelector(state=>state.userData)
     const dispatch = useDispatch()
 
 
@@ -125,13 +126,14 @@ const OnBoardPage = () => {
     }
     const submitHandle=(e)=>{
         e.preventDefault()
-        
-        fetch('http://localhost:5000/user',{
+        const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify(formData)
-        })
+        };
+       
+        fetch(config.serverUrl+'user',requestOptions)
         .then(response=>{
             if(response.ok){
                return response.json()
@@ -139,7 +141,8 @@ const OnBoardPage = () => {
         })
         .then(data=>{
             if(data.result==='user data updated'){
-                dispatch({type:'setUserData',payload:formData})
+                // dispatch({type:'setUserData',payload:formData})
+                dispatch({type:'isLogged'})
                 setUpdateResult('Changes Saved')
                 setTimeout(() => {
                     setUpdateResult('Submit Changes')
@@ -147,7 +150,6 @@ const OnBoardPage = () => {
             }
         })
     }
-    
     const UserProfileForm=()=>{
                
             return(
@@ -256,25 +258,20 @@ const OnBoardPage = () => {
 
     
 
-    useEffect(()=>{
-        
-        console.log(userData.logged,'eff');
+    useEffect(()=>{      
 
-        if(!userData.logged){
-            console.log(userData.logged);
-            
+        if(!logged){   
             dispatch({type:'showLoginForm'})
         }else{
-            
-            setFormData({...initialFormData,...userData.userData})
+            setFormData({...initialFormData,...userData})
         }
-        dispatch({type:'isLogged'})
-    },[userData.logged])
+
+    },[logged])
     
 
-    return ( <>
-        
-        {!userData.logged ? <LogInInfo/> : UserProfileForm()}
+    return ( 
+        <>
+           {!logged ? <LogInInfo/> : UserProfileForm()}
         </>
      );
 }
