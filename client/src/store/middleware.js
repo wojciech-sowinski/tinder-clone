@@ -1,41 +1,47 @@
 import config from '../config'
-
+import axios from 'axios'
+import {
+    useSelector,
+    useDispatch
+} from 'react-redux';
 
 const isLoggedMiddleware = store => next => action => {
 
-    const requestOptions = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-    }
+
+
 
     switch (action.type) {
 
-        case 'isLogged':
-            fetch(config.serverUrl + 'isLogged', requestOptions)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    } else {
-                        console.log('islogged fetch is fail');
-                    }
-                })
-                .then(data => {
-                    if (data.logged) {
-                        action.payload = data
-                        return next(action)
-                    } else {
+        case 'login':
 
-                        action.payload = {
-                            logged: false,
-                            userData: {}
-                        }
+            // useDispatch().dispatch({
+            //     type: 'isLoading',
+            //     payload: true
+            // })
+
+            (async () => {
+                try {
+
+                    const response = await axios.post(config.serverUrl + 'login', action.payload, {
+                        withCredentials: true
+                    })
+
+                    if (response.status == 200) {
+                        console.log(response.data, 'response from midleeware login action');
+                        action.payload = response.data
                         return next(action)
                     }
-                })
+
+                } catch (error) {
+                    console.log(error);
+                }
+            })().catch(err => {
+                console.error(err);
+            });
+
             break;
+
+
 
         case 'fetchUsersCatalog':
 
@@ -58,90 +64,12 @@ const isLoggedMiddleware = store => next => action => {
                 })
             break;
 
-        case 'fetchMessages':
-
-            fetch(config.serverUrl + 'msgs', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include'
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                })
-                .then(data => {
-                    action.payload = data
-                    let result = next(action);
 
 
-                    return result;
-                })
-            break;
-
-        case 'fetchNewMessageCount':
-            fetch(config.serverUrl + 'newmsgs', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include'
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                })
-                .then(data => {
-                    action.payload = data
-                    let result = next(action);
-
-                    return result;
-                })
-
-            break;
-
-        case 'sendMessage':
-
-            fetch(config.serverUrl + 'msg', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(action.payload)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                })
-                .then(data => {
-
-                    action.payload = data
-                    return next(action)
-                })
 
 
-            break;
-        case 'msgDisplayed':
 
-            fetch(config.serverUrl + 'msgdisplayed', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    msgId: action.payload
-                })
-            })
 
-            next(action)
-
-            break;
 
         default:
             return next(action)

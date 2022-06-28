@@ -5,7 +5,7 @@ import { useSelector,useDispatch } from 'react-redux'
 const ChatMatches = ({setActiveMatch,setOption}) => {
 
     const {logged,userData} =useSelector(state=>state.userData)
-    const messages =useSelector(state=>state.messages)
+    const {messages,loading} =useSelector(state=>state.messages)
     const users =useSelector(state=>state.users)
 
     const [matchesToRender,setMatchesToRender] = useState([])
@@ -48,6 +48,7 @@ const ChatMatches = ({setActiveMatch,setOption}) => {
     }
 
     useEffect(()=>{
+        console.log('match refresh');
         renderUserMatches()
     },[users,messages,userData])
 

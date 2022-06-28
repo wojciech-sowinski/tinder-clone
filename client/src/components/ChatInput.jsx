@@ -2,6 +2,8 @@ import {useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import config from '../config'
 import msgLogo from '../img/584856b4e0bb315b0f7675ac.png'
+import { fetchMessages,sendMessage } from '../actions/messagesActions'
+
 
 
 const ChatInput = ({activeMatch}) => {
@@ -13,7 +15,7 @@ const messageInitial ={
 }
 
 const [message,setMessage] = useState('')
-const messages =useSelector(state=>state.messages)
+const {messages,loading} =useSelector(state=>state.messages)
 const {logged,userData} =useSelector(state=>state.userData)
 const dispatch = useDispatch()
 
@@ -25,10 +27,11 @@ const sendMessageHandle=(e)=>{
     e.preventDefault()
     
     setMessage('')
-    dispatch({type:'sendMessage',payload:{ 
-        from:userData._id,
-        to:activeMatch,
-        body:message}})
+   
+    dispatch(sendMessage({ 
+            from:userData._id,
+            to:activeMatch,
+            body:message}))
     
 }
     return ( 

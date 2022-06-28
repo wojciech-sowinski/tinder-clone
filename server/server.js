@@ -64,6 +64,8 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
 
+    console.log(req.body);
+
 
     const {
         email,
@@ -196,6 +198,84 @@ app.post('/user', (req, res) => {
 
 })
 
+app.post('/matchupd', (req, res) => {
+    console.log(req.body);
+
+    const {
+        userId,
+        matchId
+    } = req.body
+
+    if (req.session.authToken) {
+
+
+        Promise.all([
+            User.findOneAndUpdate({
+                $and: [{
+                    _id: userId
+                }, {
+                    $not: {
+                        $matches: {
+                            matchId
+                        }
+                    }
+                }]
+            }, {
+                $push: {
+                    matches: matchId
+                }
+            }),
+            User.findOneAndUpdate({
+                $and: [{
+                    _id: matchId
+                }, {
+                    $not: {
+                        $matches: {
+                            userId
+                        }
+                    }
+                }]
+            }, {
+                $push: {
+                    matches: userId
+                }
+            })
+
+        ]).then(() => {
+            User.findOne({
+                _id: userId
+            }, (err, resolve) => {
+                if (err) {
+                    console.log(err);
+
+                } else {
+                    const message = new Message({
+                        from: userId,
+                        to: matchId,
+                        body: "Hey, I match you. Let's talk :)"
+                    })
+
+                    message.save((err, result) => {
+                        if (err) {
+                            console.log('message save ');
+
+
+                        } else {
+                            console.log('message save to db');
+
+                        }
+                    })
+                }
+
+
+            })
+            res.end()
+
+        })
+    }
+})
+
+
 app.get('/msgs', (req, res) => {
 
 
@@ -228,6 +308,8 @@ app.get('/msgs', (req, res) => {
 
 
 app.get('/newmsgs', (req, res) => {
+
+
     if (req.session.authToken) {
         Message.find({
             $and: [{
@@ -256,7 +338,7 @@ app.get('/newmsgs', (req, res) => {
 
 app.post('/msg', (req, res) => {
 
-    console.log(req.body);
+
 
 
     if (req.session.authToken) {
@@ -284,20 +366,28 @@ app.post('/msg', (req, res) => {
 
 app.post('/msgdisplayed', (req, res) => {
 
+    console.log(req.body, 'msg dipl');
 
     if (req.session.authToken) {
-        if (req.body.msgId) {
 
-            Message.findByIdAndUpdate(req.body.msgId, {
-                displayed: true
-            }).exec((err, result) => {
+        Message.updateMany({
+            $and: [{
+                displayed: false
+            }, {
+                to: req.body.to
+            }]
+        }, {
 
-            })
+            displayed: true
+        }).exec((err, result) => {
+            console.log(result);
 
-        }
 
+        })
+
+        res.end()
     }
-    console.log();
+
 
 
 })

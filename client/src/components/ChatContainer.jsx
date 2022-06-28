@@ -6,33 +6,20 @@ import ChatMatches from './ChatMatches'
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
 
+import { msgDisplayed } from '../actions/messagesActions';
+
 const ChatContainer = () => {
 
     const [activeMatch,setActiveMatch] = useState(false)  
     const [option,setOption]=useState('matches')
-    const messages =useSelector(state=>state.messages)
+    const {messages,loading} =useSelector(state=>state.messages)
     const dispatch = useDispatch()
     const setOptionHandle =(e)=>{
         setOption(e.target.value)
        
     }
 
-    // useEffect(()=>{
-
-        
-    //     const messagesCheck = setInterval(() => {   
-                       
-    //         // dispatch({type:'fetchMessages'})
-          
-
-    //     }, 3000);
-
-    //     return ()=>{
-    //         clearInterval(messagesCheck)
-           
-    //     }
-
-    // },[])
+    
 
 
     return ( 

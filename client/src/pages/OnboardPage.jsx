@@ -4,6 +4,7 @@ import LogInInfo from "../components/LoginInfo";
 import blankImg from '../img/blank-profile-picture.png'
 import '../styles/onBoardPage.scss'
 import config from "../config";
+import { isLogged } from "../actions/userActions";
 
 
 const OnBoardPage = () => {
@@ -142,7 +143,7 @@ const OnBoardPage = () => {
         .then(data=>{
             if(data.result==='user data updated'){
                 // dispatch({type:'setUserData',payload:formData})
-                dispatch({type:'isLogged'})
+                dispatch(isLogged())
                 setUpdateResult('Changes Saved')
                 setTimeout(() => {
                     setUpdateResult('Submit Changes')

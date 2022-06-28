@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import config from '../config'
 import blankUser from '../img/blank-profile-picture.png'
@@ -11,7 +11,7 @@ const ChatHeader = ({activeMatch}) => {
 
     const guestImgUrl=(id)=>{
         if(!id){
-            return config.defaultUserImg
+            return blankUser
         }else{
             return users[users.findIndex((user)=> activeMatch===user._id)].imgUrl
         }

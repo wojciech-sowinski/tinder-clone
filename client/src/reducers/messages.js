@@ -1,26 +1,33 @@
-const messages = (state = [], action) => {
+const messages = (state = {
+    loading: false,
+    messages: []
+}, action) => {
+
+
+
+
     switch (action.type) {
 
+
+
+        //================================================
         case 'fetchMessages':
 
             return action.payload;
+
+
+
         case 'sendMessage':
-            return [...state, action.payload]
-        case 'msgDisplayed':
+            console.log(action.payload);
+            return {
+                ...state,
+                messages: [...state.messages, action.payload]
+            }
+            case 'msgDisplayed':
 
-
-            return state.map(msg => {
-
-                if (msg._id === action.payload) {
-                    msg.displayed = true
-                    return msg
-                } else {
-                    return msg
-                }
-            })
-
-        default:
-            return state;
+                return state;
+            default:
+                return state;
     }
 }
 

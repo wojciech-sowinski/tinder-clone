@@ -11,31 +11,46 @@ const userData = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case 'setUserData':
-            return action.payload;
+        case 'matchUpdate':
+            console.log('matchupader reducer');
 
-        case 'isLogged':
+            return state;
+
+        case 'login':
+
             if (action.payload.logged) {
                 return action.payload
             } else {
                 return initialState
             }
-            case 'logOut':
 
-                const requestOptions = {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include'
-                };
 
-                fetch(config.serverUrl + "logout", requestOptions)
+            case 'setUserData':
+                return action.payload;
 
-                return initialState
+            case 'isLogged':
+                console.log('islogged call', action.payload);
+                if (action.payload.logged) {
+                    return action.payload
+                } else {
+                    return initialState
+                }
+                case 'logOut':
 
-            default:
-                return state;
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include'
+                    };
+
+                    fetch(config.serverUrl + "logout", requestOptions)
+
+                    return initialState
+
+                default:
+                    return state;
     }
 }
 

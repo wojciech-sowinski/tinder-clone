@@ -20,9 +20,12 @@ import {
   useSelector,
   useDispatch
 } from 'react-redux'
+import {fetchMessages,fetchNewMessageCount} from './actions/messagesActions'
+import {isLogged} from './actions/userActions'
+
 
 function App() {
-
+  
   const {
     showModal,
     formType
@@ -31,42 +34,44 @@ function App() {
     userData,
     logged
   } = useSelector(state => state.userData)
+  const isLoading = useSelector(state=>state.loaderReducer)
   const newMessages = useSelector(state => state.newMessages)
-  const messages = useSelector(state => state.messages)
+  const {messages,loading} = useSelector(state => state.messages)
   const [newMessagesPrev, setNewMessagePrev] = useState(0)
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
+    console.log('start');
+    
 
-    console.log('useeffect from app');
+    dispatch(fetchMessages(messages))
 
-    dispatch({
-      type: 'isLogged'
-    })
+
+
+    dispatch(isLogged())
+    
     dispatch({
       type: 'fetchUsersCatalog'
     })
-    dispatch({
-      type: 'fetchNewMessageCount'
-    })
-    dispatch({
-      type: 'fetchMessages'
-    })
-
-    const appInterval =setInterval(() => {
-
-      if(logged){
-        dispatch({
-          type: 'fetchNewMessageCount'
-        })
-      }
-
-      
-    }, 3000);
+    dispatch(fetchNewMessageCount())
+   
     
-    return ()=>{
-      clearInterval(appInterval)
-    }
+      const appInterval =setInterval(() => {
+          console.log('app interval');
+          if(logged){
+            console.log('app interval if logged');
+           
+            dispatch(fetchNewMessageCount())
+          }
+    
+          
+        }, 3000);
+        
+        return ()=>{
+          clearInterval(appInterval)
+        }
+
+    
 
   }, [logged,newMessages])
 

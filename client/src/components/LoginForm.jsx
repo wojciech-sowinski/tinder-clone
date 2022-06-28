@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import '../styles/loginForm.scss'
 import config from '../config'
 import RegisterButton from './RegisterButton';
+import axios from 'axios';
 
 
 
@@ -46,32 +47,14 @@ const LoginForm = () => {
         })
     }
 
-    const submitHandle=(e)=>{
-
+    const submitHandle = (e) => {
+        
         e.preventDefault()
-        const {email,password,info} = loginFormData
-                
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ email,password})
-        };
-
-        fetch(config.serverUrl+'login',requestOptions)
-            .then(response=>{
-                if(!response.ok){
-                    throw new Error('register data send error')
-                }
-                return response.json()
-            })
-            .then(data=>{
-               console.log('login submit');
-            //    dispatch({type:"setUserData",payload:data})
-               dispatch({
-                type: 'isLogged'
-              })
-            })
+        const {email,password,info} = loginFormData;            
+        
+       
+           dispatch({type:'login',payload:{email,password}})
+                        
 
     }
 

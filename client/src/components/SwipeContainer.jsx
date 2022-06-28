@@ -2,6 +2,7 @@ import TinderCard from 'react-tinder-card'
 import { useEffect, useState } from 'react'
 import config from '../config'
 import { useSelector,useDispatch } from 'react-redux'
+import { matchUpdate } from '../actions/userActions'
 
 
 const SwipeContainer = () => {
@@ -11,11 +12,15 @@ const SwipeContainer = () => {
   const dispatch = useDispatch()
   const {logged,userData} =useSelector(state=>state.userData)
 
+
             
        
         const [lastDirection, setLastDirection] = useState()
 
 const addMatch=(id)=>{
+
+
+
           console.log('add match start');
           const userMatches = [...userData.matches]
 
@@ -26,25 +31,28 @@ const addMatch=(id)=>{
 
             const matches = [...userData.matches,id]
 
-              fetch('http://localhost:5000/user',{
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({matches})
-                })
-                .then(response=>{
-                    if(response.ok){
-                      return response.json()
-                    }
-                })
-                .then(data=>{
-                  console.log(data);
-                    if(data.result=='user data updated'){
-                      console.log('dispatch userdata');
-                      dispatch({type:'isLogged'})
+
+            dispatch(matchUpdate(userData._id,id))
+
+        //       fetch('http://localhost:5000/user',{
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         credentials: 'include',
+        //         body: JSON.stringify({matches})
+        //         })
+        //         .then(response=>{
+        //             if(response.ok){
+        //               return response.json()
+        //             }
+        //         })
+        //         .then(data=>{
+        //           console.log(data);
+        //             if(data.result=='user data updated'){
+        //               console.log('dispatch userdata');
+        //               dispatch({type:'isLogged'})
                     
-                }
-        })
+        //         }
+        // })
           
 
           }

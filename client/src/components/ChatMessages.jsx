@@ -2,30 +2,37 @@ import { useEffect, useState,useRef } from 'react'
 import config from '../config'
 import Message from './Message'
 import { useSelector,useDispatch } from 'react-redux'
+import { msgDisplayed } from '../actions/messagesActions'
 
 
 const ChatMessages = ({activeMatch}) => {
     const users =useSelector(state=>state.users)
     
-    const {userData} =useSelector(state=>state.userData)
-    const messages =useSelector(state=>state.messages)
+    const {logged,userData} =useSelector(state=>state.userData)
+    const {messages,loading} =useSelector(state=>state.messages)
     const dispatch = useDispatch()
     const lastMessage = useRef(null);
     
     const [msgsToRender,setMsgsToRender] =useState(messages)
 
+    
+
     useEffect(()=>{
 
         setMsgsToRender(messages)
-        
-       
+       console.log('chat diplay');
+    //    setTimeout(() => {
+    //     dispatch({type:'msgDisplayed',payload:userData._id})
+    //    }, 3000);
         return ()=>{
             // clearInterval(messagesCheck)
             setMsgsToRender([])
-            
+            dispatch(msgDisplayed(userData._id))
         }
 
     },[messages])
+
+
 
 
     const renderMessages=()=>{

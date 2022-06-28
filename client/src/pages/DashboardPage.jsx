@@ -15,7 +15,8 @@ const DashboardPage = () => {
 
     useEffect(()=>{
      
-        // dispatch({type:'isLogged'})
+       
+        
 
     
     },[])
