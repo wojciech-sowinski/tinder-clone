@@ -375,6 +375,8 @@ app.post('/msgdisplayed', (req, res) => {
                 displayed: false
             }, {
                 to: req.body.to
+            }, {
+                from: req.body.from
             }]
         }, {
 

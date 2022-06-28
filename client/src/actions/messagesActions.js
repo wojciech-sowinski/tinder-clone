@@ -75,11 +75,12 @@ export const fetchNewMessageCount = () => async (dispatch) => {
 }
 
 
-export const msgDisplayed = (to) => async (dispatch) => {
+export const msgDisplayed = (from, to) => async (dispatch) => {
     console.log('msgdisplayed dfromn actions');
 
     try {
         axios.post(config.serverUrl + 'msgdisplayed', {
+            from,
             to
         }, {
             withCredentials: true

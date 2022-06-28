@@ -25,9 +25,9 @@ const ChatHeader = ({activeMatch}) => {
             </div>
             <div><span>talk with</span></div>
             <div className='guess-img'>
-                <div className='match-thumb-img-container'>
+                
                         <img className='match-thumb-img' key={activeMatch}  src={guestImgUrl(activeMatch)} alt="" />
-                    </div>
+                    
             </div>
         </div>
         </>

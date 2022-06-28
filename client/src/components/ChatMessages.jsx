@@ -27,7 +27,7 @@ const ChatMessages = ({activeMatch}) => {
         return ()=>{
             // clearInterval(messagesCheck)
             setMsgsToRender([])
-            dispatch(msgDisplayed(userData._id))
+            dispatch(msgDisplayed(activeMatch,userData._id))
         }
 
     },[messages])
