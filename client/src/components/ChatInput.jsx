@@ -6,7 +6,8 @@ import { fetchMessages, sendMessage } from '../actions/messagesActions'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-
+import { motion, AnimatePresence } from 'framer-motion'
+import { divContainerVariants, pageContainerVariants } from '../animations/motion'
 
 const ChatInput = ({ activeMatch }) => {
 
@@ -38,13 +39,22 @@ const ChatInput = ({ activeMatch }) => {
 
     }
     return (
-        <div className="chat-innput-container">
+        <motion.div className="chat-innput-container"
+
+            key={"chatmatcheskey"}
+            variants={divContainerVariants}
+            initial='hidden'
+            animate='visible'
+            exit='exit'
+        >
+
+
             <form onSubmit={sendMessageHandle}>
                 <input type="text" name="chat-input"
                     value={message} onChange={handleChange} />
                 <button className="chat-send-btn"><FontAwesomeIcon icon={faEnvelope} /></button>
             </form>
-        </div>
+        </motion.div>
     );
 }
 

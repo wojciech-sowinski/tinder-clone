@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 import config from '../config'
 import { useSelector, useDispatch } from 'react-redux'
 import { matchUpdate } from '../actions/userActions'
-
+import MatchedUserPage from "../components/MatchedUserPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDays, faCakeCandles } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarDays, faCakeCandles, faMars, faVenus, faVenusMars } from '@fortawesome/free-solid-svg-icons'
+import { motion, AnimatePresence } from 'framer-motion'
+import { divContainerVariants, pageContainerVariants } from '../animations/motion'
 
 
-const SwipeContainer = () => {
+const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
 
   const users = useSelector(state => state.users)
   const [characters, setCharacters] = useState(users)
@@ -41,7 +43,21 @@ const SwipeContainer = () => {
     return sortedUsers
   }
 
+  const genderSign = (gender) => {
 
+    switch (gender) {
+      case 'Female':
+        return <FontAwesomeIcon icon={faVenus} />
+      case 'Male':
+        return <FontAwesomeIcon icon={faMars} />
+      case 'Both':
+        return <FontAwesomeIcon icon={faVenusMars} />
+
+      default:
+        break;
+    }
+
+  }
 
   const swiped = (direction, nameToDelete) => {
 
@@ -66,8 +82,15 @@ const SwipeContainer = () => {
   }, [users, userData])
 
   return (
-    <div className="swipe-container">
-      <div className='cardContainer'>
+    <motion.div className="swipe-container"
+      variants={divContainerVariants}
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+      key={'dashboardpagekey'}>
+
+      <div className='cardContainer'
+      >
         {sortCharacters(characters).map((character) =>
           <TinderCard
             key={character._id}
@@ -80,7 +103,7 @@ const SwipeContainer = () => {
             </div>
             <div className='tinder-card-character-info'>
               <div className='card-header'>
-                <span className='character-first-name'>{character.firstName}</span> <span className='character-age'><FontAwesomeIcon icon={faCakeCandles} />{` ${characterAge(character.birthDate)}`}</span>
+                <span className='character-first-name'>{character.firstName} {genderSign(character.gender)}</span> <span className='character-age'><FontAwesomeIcon icon={faCakeCandles} />{` ${characterAge(character.birthDate)}`}</span>
               </div>
               <div className='about-me'>
                 <h4>About Me</h4>
@@ -95,7 +118,7 @@ const SwipeContainer = () => {
         <span>{`<<`}Swipe left to forget</span>
         <span>Swipe right to match{`>>`}</span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -8,12 +8,12 @@ import ChatHeader from './ChatHeader'
 import ChatMatches from './ChatMatches'
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
-
+import { motion, AnimatePresence } from 'framer-motion'
 import { msgDisplayed } from '../actions/messagesActions';
 
-const ChatContainer = () => {
+const ChatContainer = ({ activeMatch, setActiveMatch }) => {
 
-    const [activeMatch, setActiveMatch] = useState(false)
+
     const [option, setOption] = useState('matches')
     const { messages, loading } = useSelector(state => state.messages)
     const dispatch = useDispatch()
@@ -23,11 +23,9 @@ const ChatContainer = () => {
 
     }
 
-
-
-
     return (
         <>
+
             <div className="chat-container">
                 <ChatHeader activeMatch={activeMatch} />
                 <div className='options'>
@@ -36,12 +34,13 @@ const ChatContainer = () => {
                             onClick={setOptionHandle}
                             className={`chat-options ${activeMatch ? 'active' : ''}`} value="matches">Back to Matches <FontAwesomeIcon icon={faRotateBack} /></button>
                     ) : ''}
-
-
                 </div>
-                {option === 'matches' ?
-                    <ChatMatches setActiveMatch={setActiveMatch} setOption={setOption} /> : (activeMatch ? <><ChatMessages activeMatch={activeMatch} /> <ChatInput activeMatch={activeMatch} /></> : '')}
+                <AnimatePresence exitBeforeEnter>
+                    {option === 'matches' ?
+                        <ChatMatches key={'chatmatcheskey'} setActiveMatch={setActiveMatch} setOption={setOption} /> : (activeMatch ? <><ChatMessages key={'chatmessageskey'} activeMatch={activeMatch} /> <ChatInput key={'chatinputkey'} activeMatch={activeMatch} /></> : '')}
+                </AnimatePresence>
             </div>
+
         </>
     );
 }
