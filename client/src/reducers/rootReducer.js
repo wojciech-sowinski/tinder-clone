@@ -6,6 +6,7 @@ import userData from './userData'
 import messages from './messages'
 import users from './users'
 import newMessages from './newMessages'
+import dataLoaderReducer from './dataLoaderReducer'
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     userData,
     messages,
     users,
-    newMessages
+    newMessages,
+    dataLoaderReducer
 })
 
 

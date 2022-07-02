@@ -8,8 +8,12 @@ import config from "../config";
 
 
 export const isLogged = () => async (dispatch) => {
-
-
+    
+    
+    dispatch({
+        type: 'userDataLoading',
+        payload: true
+    })
 
     try {
 
@@ -23,6 +27,11 @@ export const isLogged = () => async (dispatch) => {
             dispatch({
                 type: 'isLogged',
                 payload: response.data
+            })
+           
+            dispatch({
+                type: 'userDataLoading',
+                payload: false
             })
         }
 

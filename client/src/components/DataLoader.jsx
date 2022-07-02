@@ -1,0 +1,24 @@
+import Loader from "react-js-loader";
+import '../styles/dataLoader.scss'
+import { motion, AnimatePresence } from 'framer-motion'
+import { divContainerVariants, pageContainerVariants } from '../animations/motion'
+
+const DataLoader = () => {
+    return (
+        <div className="data-loader">
+            <AnimatePresence>
+                <motion.div
+                    className="loader-icon"
+                    key={"loadericonskey"}
+                    variants={divContainerVariants}
+                    initial='hidden'
+                    animate='visible'
+                    exit='exit'>
+                    <Loader type="bubble-loop" bgColor={"rgb(201, 0, 50)"} title={"loading"} color={'#afafaf'} size={100} />
+                </motion.div>
+            </AnimatePresence>
+        </div>
+    );
+}
+
+export default DataLoader;

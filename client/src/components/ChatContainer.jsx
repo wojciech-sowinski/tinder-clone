@@ -10,6 +10,7 @@ import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
 import { motion, AnimatePresence } from 'framer-motion'
 import { msgDisplayed } from '../actions/messagesActions';
+import { divContainerVariants, divFlipContainerVariants } from '../animations/motion';
 
 const ChatContainer = ({ activeMatch, setActiveMatch }) => {
 
@@ -29,11 +30,20 @@ const ChatContainer = ({ activeMatch, setActiveMatch }) => {
             <div className="chat-container">
                 <ChatHeader activeMatch={activeMatch} />
                 <div className='options'>
-                    {activeMatch ? (
-                        <button
-                            onClick={setOptionHandle}
-                            className={`chat-options ${activeMatch ? 'active' : ''}`} value="matches">Back to Matches <FontAwesomeIcon icon={faRotateBack} /></button>
-                    ) : ''}
+                    <AnimatePresence >
+                        {activeMatch ? (
+                            <motion.button
+                                key={"chatmatcheskey"}
+                                variants={divContainerVariants}
+                                initial='hidden'
+                                animate='visible'
+                                exit='exit'
+
+                                onClick={setOptionHandle}
+                                className={`chat-options ${activeMatch ? 'active' : ''}`} value="matches">Back to Matches <FontAwesomeIcon icon={faRotateBack} />
+                            </motion.button>
+                        ) : ''}
+                    </AnimatePresence>
                 </div>
                 <AnimatePresence exitBeforeEnter>
                     {option === 'matches' ?

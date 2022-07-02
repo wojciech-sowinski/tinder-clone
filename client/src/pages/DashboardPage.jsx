@@ -18,7 +18,7 @@ const DashboardPage = () => {
     const { logged, userData } = useSelector(state => state.userData)
     const [activeMatch, setActiveMatch] = useState(false)
 
-    const ifLogged = (logged) => {
+    const dashboardPageRender = (logged) => {
 
         if (logged) {
 
@@ -54,7 +54,7 @@ const DashboardPage = () => {
             key={'dashboardpagekey'}
         >
 
-            {ifLogged(logged)}
+            {dashboardPageRender(logged)}
 
         </motion.div>
     );

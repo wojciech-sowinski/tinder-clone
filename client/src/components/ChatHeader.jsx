@@ -1,37 +1,55 @@
-import {useState,useEffect} from 'react'
-import { useSelector,useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import config from '../config'
 import blankUser from '../img/blank-profile-picture.png'
+import { motion, AnimatePresence } from 'framer-motion'
+import { divContainerVariants, divFlipContainerVariants } from '../animations/motion';
 
+const ChatHeader = ({ activeMatch }) => {
 
-const ChatHeader = ({activeMatch}) => {
+    const { logged, userData } = useSelector(state => state.userData)
+    const users = useSelector(state => state.users)
 
-    const {logged,userData} =useSelector(state=>state.userData)
-    const users =useSelector(state=>state.users)
-
-    const guestImgUrl=(id)=>{
-        if(!id){
+    const guestImgUrl = (id) => {
+        if (!id) {
             return blankUser
-        }else{
-            return users[users.findIndex((user)=> activeMatch===user._id)].imgUrl
+        } else {
+            return users[users.findIndex((user) => activeMatch === user._id)].imgUrl
         }
     }
 
-    return ( 
+    return (
         <>
-        <div className="chat-header">
-            <div className='user-img'>
-                <img src={userData.imgUrl} alt="" />
+            <div className="chat-header">
+                <div className='user-img'>
+                    <AnimatePresence exitBeforeEnter>
+                        <motion.img
+                            key={"chatheaderuserimgkey"}
+                            variants={divContainerVariants}
+                            initial='hidden'
+                            animate='visible'
+                            exit='exit'
+                            src={userData.imgUrl} alt="" />
+                    </AnimatePresence>
+                </div>
+                <div><span>talk with</span></div>
+                <div className='guess-img'>
+                    <AnimatePresence exitBeforeEnter>
+                        <motion.img
+                            className='match-thumb-img'
+                            key={activeMatch}
+                            src={guestImgUrl(activeMatch)}
+                            alt=""
+
+                            variants={divContainerVariants}
+                            initial='hidden'
+                            animate='visible'
+                            exit='exit' />
+                    </AnimatePresence>
+                </div>
             </div>
-            <div><span>talk with</span></div>
-            <div className='guess-img'>
-                
-                        <img className='match-thumb-img' key={activeMatch}  src={guestImgUrl(activeMatch)} alt="" />
-                    
-            </div>
-        </div>
         </>
-     );
+    );
 }
- 
+
 export default ChatHeader;

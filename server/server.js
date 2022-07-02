@@ -3,12 +3,21 @@ const cookieSession = require('cookie-session')
 const express = require('express')
 const cors = require("cors");
 const config = require('./config')
-
+// const fs = require('fs')
+// const path = require('path')
+// const multer  = require('multer');
+// const formidableMiddleware = require('express-formidable')
+// const {GridFsStorage} = require('multer-gridfs-storage');
+// const Grid = require('gridfs-stream')
+// const methodOverride = require('method-override')
+const bodyParser = require('body-parser')
 
 const User = require('./models/user')
 const Message = require('./models/message')
 
+const router = express.Router()
 
+const uploadRoute =require('./routes/uploadRoute')
 
 const {
     serverPort,
@@ -21,8 +30,9 @@ const {
 const app = express()
 app.listen(serverPort)
 
-mongoose.connect(mongoDbUrl)
 
+
+mongoose.connect(mongoDbUrl)
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:3000'
@@ -33,6 +43,24 @@ app.use(cookieSession({
     keys: cookieKeys,
     maxAge: cookieMaxAge
 }))
+
+app.use('/',uploadRoute)
+// app.use(formidableMiddleware({
+    
+//     // uploadDir: './imguploads/',
+//     // multiples: true, // req.files to be arrays of files
+//   }));
+
+// const upload = multer({ dest: './imguploads/' })
+
+
+//  app.post('/imgupld',upload.single('avatar'), (req, res) => {
+   
+//     console.log(req.file, req.body)
+// res.end()
+
+//   })
+
 
 
 app.post('/register', (req, res) => {
@@ -366,7 +394,7 @@ app.post('/msg', (req, res) => {
 
 app.post('/msgdisplayed', (req, res) => {
 
-    console.log(req.body, 'msg dipl');
+   
 
     if (req.session.authToken) {
 
@@ -393,3 +421,4 @@ app.post('/msgdisplayed', (req, res) => {
 
 
 })
+

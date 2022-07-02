@@ -3,7 +3,8 @@ import config from "../config";
 
 const initialState = {
     logged: false,
-    userData: {}
+    userData: {},
+    userDataLoading:false
 }
 
 
@@ -11,13 +12,15 @@ const userData = (state = initialState, action) => {
 
     switch (action.type) {
 
+        case 'userDataLoading':
+            return {
+                ...state,
+                userDataLoading:action.payload
+            }
+
         case 'matchUpdate':
-            console.log('matchupader reducer');
-
             return state;
-
         case 'login':
-
             if (action.payload.logged) {
                 return action.payload
             } else {
@@ -25,11 +28,11 @@ const userData = (state = initialState, action) => {
             }
 
 
-            case 'setUserData':
-                return action.payload;
+        case 'setUserData':
+            return action.payload;
 
-            case 'isLogged':
-                console.log('islogged call', action.payload);
+        case 'isLogged':
+               
                 if (action.payload.logged) {
                     return action.payload
                 } else {

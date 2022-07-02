@@ -50,7 +50,7 @@ const MatchedUserPage = ({ activeMatch }) => {
 
                 <h2 > {firstName} </h2>
                 <div className='match-user-info-bar'>
-                    <span>Age: {` ${characterAge(birthDate)}`}</span>
+                    <span>Age: <span className='match-user-age-span'>{` ${characterAge(birthDate)}`}</span></span>
                     <span>
                         Gender: {genderSign(gender)}
                     </span>

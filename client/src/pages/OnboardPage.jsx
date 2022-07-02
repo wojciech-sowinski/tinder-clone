@@ -12,7 +12,7 @@ import { pageContainerVariants } from '../animations/motion'
 const OnBoardPage = () => {
 
 
-    const { userData, logged } = useSelector(state => state.userData)
+    const { userData, logged, userDataLoading } = useSelector(state => state.userData)
     const dispatch = useDispatch()
 
 
@@ -28,6 +28,7 @@ const OnBoardPage = () => {
     }
     const [formData, setFormData] = useState(initialFormData)
     const [updateResult, setUpdateResult] = useState('Submit Changes')
+    const [images, setImages] = useState('')
 
 
     const handleFirstNameChange = (e) => {
@@ -157,26 +158,26 @@ const OnBoardPage = () => {
                 }
             })
     }
+
+
+
+    const imgupldHandle = (e) => {
+
+    }
+
     const UserProfileForm = () => {
 
 
 
         return (
-            <motion.div className="on-board-page"
 
-                variants={pageContainerVariants}
-                initial='hidden'
-                animate='visible'
-                exit='exit'
-
-
-
-
-            >
-
+            <>
 
                 <h1>Your Profile</h1>
+
+
                 <form onSubmit={submitHandle}>
+
                     <div className="first-col">
                         <div>
                             <label>First Name</label>
@@ -272,7 +273,7 @@ const OnBoardPage = () => {
 
                 </form>
 
-            </motion.div>
+            </>
         )
 
     }
@@ -281,7 +282,7 @@ const OnBoardPage = () => {
 
     useEffect(() => {
 
-        if (!logged) {
+        if (!logged && !userDataLoading) {
             dispatch({ type: 'showLoginForm' })
         } else {
             setFormData({ ...initialFormData, ...userData })
@@ -292,7 +293,19 @@ const OnBoardPage = () => {
 
     return (
         <>
-            {!logged ? <LogInInfo /> : UserProfileForm()}
+            <motion.div className="on-board-page"
+
+                variants={pageContainerVariants}
+                initial='hidden'
+                animate='visible'
+                exit='exit'
+
+
+
+
+            >
+                {!logged ? <LogInInfo /> : UserProfileForm()}
+            </motion.div>
         </>
     );
 }

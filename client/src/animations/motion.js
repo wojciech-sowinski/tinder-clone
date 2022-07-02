@@ -46,6 +46,29 @@ export const divContainerVariants = {
         
     },
 }
+export const divFlipContainerVariants = {
+    hidden: { 
+        opacity:0,
+        transform: 'rotateX(90deg)'
+},
+    visible: {
+       opacity:1,
+        transform: 'rotateX(0deg)',
+        transition: {
+            
+            duration: 0.4
+          },
+    }, exit: {
+        opacity:0,
+        transform: 'rotateX(90deg)',
+        transition: {
+            
+            duration: 0.4,
+            
+          }
+        
+    },
+}
 
 
 
