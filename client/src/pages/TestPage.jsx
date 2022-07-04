@@ -1,7 +1,5 @@
 import { motion, AnimatePresence, useAnimation } from "framer-motion"
-import DataLoader from '../components/DataLoader'
-import UploadImg from "../components/UploadImg"
-
+import SliderWithThumb from "../components/SliderWithThumb"
 
 const TestPage = (props) => {
 
@@ -33,7 +31,7 @@ const TestPage = (props) => {
 
     return (
         <div className="test-page">
-            <UploadImg />
+
         </div>
     );
 }

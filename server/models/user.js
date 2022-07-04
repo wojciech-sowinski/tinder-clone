@@ -26,10 +26,10 @@ const schema = new mongoose.Schema({
         type: String
     },
     imgUrl: {
-        type: String
+        type: [String]
     },
     matches: {
-        type: Array
+        type: [String]
     },
     created: {
         type: Date,

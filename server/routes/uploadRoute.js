@@ -1,8 +1,11 @@
 const express = require('express');
+const path = require('path')
 const router = express.Router();
 const User = require('../models/user')
 const multer  = require('multer');
-const formidableMiddleware = require('express-formidable')
+const { json } = require('body-parser');
+const { url } = require('inspector');
+
 
 const whitelist = [
     'image/png',
@@ -14,7 +17,9 @@ const whitelist = [
 const fileStorageEngine = multer.diskStorage({
     destination : (req,file,cb)=>{
         cb(null,'./imguploads')
-    },
+    },filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+      }
     
 })
 
@@ -22,23 +27,39 @@ const upload = multer({
     storage:fileStorageEngine,
     fileFilter: (req,file,cb)=>{
         if (!whitelist.includes(file.mimetype)||!req.session.authToken) {
-            return cb(null, false)
-            
-          }
-      
+            return cb(null, false)            
+          }      
           cb(null, true)
     }
     
 })
 
 
-
+router.use(json())
 
 router.post('/upload',upload.single("image"), (req,res)=>{
 
-   
+    const newImgUrl = req.protocol + '://' + req.get('host') + '/userimgs/' + req.file.filename
     
-    console.log(req.file);
+    
+   
+    if (req.session.authToken) {     
+     
+        const userDataUpdate = User.findByIdAndUpdate(req.session.authToken, {
+            $push: {
+                imgUrl:newImgUrl
+            }
+        })
+        userDataUpdate.exec((err, data) => {
+            if (err) {
+                console.log(err);                
+            }
+            if (data) {
+                console.log(data);                
+            }            
+        })
+    }
+  
 
 res.send('upload single file')
 

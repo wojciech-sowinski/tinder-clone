@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import LogInInfo from "../components/LoginInfo";
+import UploadImg from "../components/UploadImg";
 import blankImg from '../img/blank-profile-picture.png'
 import '../styles/onBoardPage.scss'
 import config from "../config";
 import { isLogged } from "../actions/userActions";
 import { motion } from 'framer-motion'
 import { pageContainerVariants } from '../animations/motion'
+import SliderWithThumb from "../components/SliderWithThumb";
 
 
 const OnBoardPage = () => {
@@ -28,7 +30,7 @@ const OnBoardPage = () => {
     }
     const [formData, setFormData] = useState(initialFormData)
     const [updateResult, setUpdateResult] = useState('Submit Changes')
-    const [images, setImages] = useState('')
+    const [images, setImages] = useState(userData.imgUrl)
 
 
     const handleFirstNameChange = (e) => {
@@ -161,10 +163,6 @@ const OnBoardPage = () => {
 
 
 
-    const imgupldHandle = (e) => {
-
-    }
-
     const UserProfileForm = () => {
 
 
@@ -255,17 +253,13 @@ const OnBoardPage = () => {
                     </div>
                     <div className="second-col">
                         <div>
-                            <label>Profile Photo</label>
+                            <label>Profile Photos</label>
                         </div>
                         <div>
-                            <input type="url" placeholder="past your photo URL"
-                                name="imgUrl"
-                                onChange={handleImgUrlChange}
-                                value={formData.imgUrl} />
+                            {<UploadImg />}
+                            <SliderWithThumb userImages={userData.imgUrl} />
                         </div>
-                        <div className="user-img-container">
-                            <img src={formData.imgUrl || blankImg} alt="user main photo" />
-                        </div>
+
                         <div style={{ textAlign: "center" }}>
                             <button className="submit-button" type="submit">{updateResult}</button>
                         </div>
@@ -288,7 +282,7 @@ const OnBoardPage = () => {
             setFormData({ ...initialFormData, ...userData })
         }
 
-    }, [logged])
+    }, [logged, userData])
 
 
     return (
