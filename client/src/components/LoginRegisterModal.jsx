@@ -25,7 +25,7 @@ const LoginRegisterModal = () => {
     const modalRender = () => {
 
         if (userDataLoading) {
-            return <DataLoader />
+            // return <DataLoader />
         } else {
             if (!logged) {
                 return (<div className="login-register-modal">

@@ -4,6 +4,7 @@ import { faCalendarDays, faCakeCandles, faMars, faVenus, faVenusMars } from '@fo
 import '../styles/matchedUserPage.scss'
 import { motion, AnimatePresence } from 'framer-motion'
 import { divContainerVariants, pageContainerVariants } from '../animations/motion'
+import SliderWithThumb from './SliderWithThumb'
 
 const MatchedUserPage = ({ activeMatch }) => {
 
@@ -44,7 +45,7 @@ const MatchedUserPage = ({ activeMatch }) => {
 
 
             <div className='match-user-imgs'>
-                <img src={imgUrl} alt="matched user img" />
+                <SliderWithThumb userImages={imgUrl} />
             </div>
             <div className='match-user-info'>
 
@@ -60,9 +61,9 @@ const MatchedUserPage = ({ activeMatch }) => {
                 </div>
 
                 <div className='about-me-container'>
-                    <p>
+                    <h4>
                         About me:
-                    </p>
+                    </h4>
                     <p>{aboutMe}</p>
                 </div>
 

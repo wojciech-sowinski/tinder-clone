@@ -38,6 +38,7 @@ const upload = multer({
 router.use(json())
 
 router.post('/upload',upload.single("image"), (req,res)=>{
+console.log(req.file);
 
     const newImgUrl = req.protocol + '://' + req.get('host') + '/userimgs/' + req.file.filename
     
@@ -52,16 +53,16 @@ router.post('/upload',upload.single("image"), (req,res)=>{
         })
         userDataUpdate.exec((err, data) => {
             if (err) {
-                console.log(err);                
+                res.json({uploadResult:false})              
             }
             if (data) {
-                console.log(data);                
+               res.json({uploadResult:true})            
             }            
         })
     }
   
 
-res.send('upload single file')
+
 
    
 

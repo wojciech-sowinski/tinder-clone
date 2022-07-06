@@ -15,6 +15,15 @@ const OnBoardPage = () => {
 
 
     const { userData, logged, userDataLoading } = useSelector(state => state.userData)
+
+    const { firstName,
+        birthDate,
+        gender,
+        interest,
+        aboutMe,
+        email
+    } = userData
+
     const dispatch = useDispatch()
 
 
@@ -24,9 +33,8 @@ const OnBoardPage = () => {
         gender: '',
         interest: '',
         aboutMe: '',
-        imgUrl: '',
         email: '',
-        matches: []
+
     }
     const [formData, setFormData] = useState(initialFormData)
     const [updateResult, setUpdateResult] = useState('Submit Changes')
@@ -118,29 +126,30 @@ const OnBoardPage = () => {
         }
     }
     const handleAboutMeChange = (e) => {
-        setFormData((prev) => {
-            return {
-                ...prev,
-                aboutMe: e.target.value
-            }
-        })
+        console.log(e.target.value.length);
+        if (e.target.value.length <= 200) {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    aboutMe: e.target.value
+                }
+            })
+
+        }
+
 
     }
-    const handleImgUrlChange = (e) => {
-        setFormData((prev) => {
-            return {
-                ...prev,
-                imgUrl: e.target.value
-            }
-        })
-    }
+
     const submitHandle = (e) => {
         e.preventDefault()
+
+        const { firstName, birthDate, gender, interest, aboutMe, email } = formData
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-            body: JSON.stringify(formData)
+            body: JSON.stringify({ firstName, birthDate, gender, interest, aboutMe, email })
         };
 
         fetch(config.serverUrl + 'user', requestOptions)
@@ -244,11 +253,12 @@ const OnBoardPage = () => {
                             <label>About Me</label>
                         </div>
                         <div>
-                            <textarea cols="30" rows="10"
+                            <textarea placeholder="Maximum 200 characters" cols="30" rows="10"
                                 onChange={handleAboutMeChange}
                                 name="aboutMe"
                                 value={formData.aboutMe}>
                             </textarea>
+                            <p className="character-left-info">  {formData.aboutMe.length ? `(${200 - formData.aboutMe.length} character left)` : ""} </p>
                         </div>
                     </div>
                     <div className="second-col">
@@ -257,9 +267,11 @@ const OnBoardPage = () => {
                         </div>
                         <div>
                             {<UploadImg />}
+                        </div>
+                        <div>
+
                             <SliderWithThumb userImages={userData.imgUrl} />
                         </div>
-
                         <div style={{ textAlign: "center" }}>
                             <button className="submit-button" type="submit">{updateResult}</button>
                         </div>
@@ -282,7 +294,7 @@ const OnBoardPage = () => {
             setFormData({ ...initialFormData, ...userData })
         }
 
-    }, [logged, userData])
+    }, [logged, firstName, birthDate, gender, interest, aboutMe, email])
 
 
     return (

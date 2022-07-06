@@ -1,6 +1,6 @@
 .dashboard-page {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   min-height: 100%;
   width: 100%;
   align-items: stretch;
@@ -13,33 +13,44 @@
   }
 
   .swipe-container {
-    min-height: calc(100vh - 210px);
-    width: 70%;
-    min-width: 500px;
-    position: relative;
+    margin: 30px 30px;
+    display: flex;
 
-    .swipe-info {
+    .swipe-info-left,
+    .swipe-info-right {
+      padding: 20px;
+      height: 100%;
+
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      z-index: -1;
+      span {
+        width: 100%;
+      }
     }
 
     .swipe {
       position: absolute;
-      height: 80%;
-      width: 360px;
-      margin: 0px 0;
-      background-color: #fff;
+      max-width: 400px;
+      padding: 10px;
+
+      border-radius: 10px;
+
       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+      background-color: #fff;
+
       overflow: hidden;
       border-radius: 10px;
-      animation-name: popup;
-      animation-duration: 2s;
     }
 
     .cardContainer {
-      height: 80%;
-      margin: 10px auto;
-      max-width: 260px;
+      width: 400px;
+      display: flex;
+      justify-content: center;
     }
 
     .tinder-card-character-info {
@@ -48,7 +59,7 @@
       row-gap: 10px;
       background-color: rgb(255, 255, 255);
       padding: 10px;
-      font-size: 15px;
+      font-size: 1.3rem;
       position: relative;
       bottom: 0;
 
@@ -138,7 +149,6 @@
       margin: 0 10px;
       font-weight: bolder;
       width: 160px;
-      box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
     }
 
     .buttons button:hover {

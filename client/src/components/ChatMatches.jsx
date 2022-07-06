@@ -38,7 +38,7 @@ const ChatMatches = ({ setActiveMatch, setOption }) => {
                         <img className='match-thumb-img' onClick={() => {
                             setActiveMatch(match)
                             setOption('chat')
-                        }} src={users[users.findIndex((user) => match === user._id)].imgUrl} alt="" />
+                        }} src={users[users.findIndex((user) => match === user._id)].imgUrl[0]} alt="" />
 
                         {matchMessageCounter(match)}
                         <span className='match-first-name'>{users[users.findIndex((user) => match === user._id)].firstName}</span>
@@ -51,7 +51,7 @@ const ChatMatches = ({ setActiveMatch, setOption }) => {
     }
 
     useEffect(() => {
-        console.log('match refresh');
+
         renderUserMatches()
     }, [users, messages, userData])
 

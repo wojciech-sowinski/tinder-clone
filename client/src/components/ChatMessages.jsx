@@ -21,12 +21,9 @@ const ChatMessages = ({ activeMatch }) => {
     useEffect(() => {
 
         setMsgsToRender(messages)
-        console.log('chat diplay');
-        //    setTimeout(() => {
-        //     dispatch({type:'msgDisplayed',payload:userData._id})
-        //    }, 3000);
+
         return () => {
-            // clearInterval(messagesCheck)
+
             setMsgsToRender([])
             dispatch(msgDisplayed(activeMatch, userData._id))
         }
@@ -60,9 +57,7 @@ const ChatMessages = ({ activeMatch }) => {
     }
 
     return (
-
         <>
-
             <motion.div
                 key={"chatmessageskey"}
                 variants={divContainerVariants}

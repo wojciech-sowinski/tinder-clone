@@ -1,4 +1,4 @@
-
+import imageCompression from 'browser-image-compression';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FileUploader } from "react-drag-drop-files";
@@ -17,11 +17,30 @@ function UploadImg() {
     const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "WEBP"];
 
 
-    const handleChange = (file) => {
+    const handleChange = async (file) => {
+
+
+        const compresionOptions = {
+            maxSizeMB: 0.1,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+            fileType: file.type,
+        }
+
         setUploading(true)
+
+        console.log('before ', file);
+
+        const compressedFile = await imageCompression(file, compresionOptions);
+
+        console.log('after ', compressedFile);
+
         const formData = new FormData();
 
-        formData.append('image', file);
+
+
+        formData.append('image', compressedFile);
+
 
 
         axios({
@@ -36,9 +55,14 @@ function UploadImg() {
                 if (result.status === 200) {
                     setUploading(false)
 
+                    if (result.data.uploadResult) {
+                        dispatch(isLogged())
+
+                    } else {
+                        alert('Upload file error')
+                    }
 
 
-                    dispatch(isLogged())
 
 
                 } else {

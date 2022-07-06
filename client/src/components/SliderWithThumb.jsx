@@ -1,14 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+import '../styles/sliderWithThumb.scss';
 import blankImg from '../img/blank-profile-picture.png'
 
 
 const SliderWithThumb = ({ userImages }) => {
 
-    const initialState = userImages.length ? userImages : [blankImg]
-
-    const [images, setImages] = useState(initialState)
+    const images = userImages.length ? userImages : [blankImg]
 
 
 
@@ -17,7 +15,7 @@ const SliderWithThumb = ({ userImages }) => {
 
     const FullSliderImgs = (fullImages) => {
 
-        const fullImagesToRender = [...images].map(image => (
+        const fullImagesToRender = [...fullImages].map(image => (
             <SplideSlide
                 key={image}>
                 <img
@@ -30,18 +28,18 @@ const SliderWithThumb = ({ userImages }) => {
 
     const ThumbSliderImgs = (thumbImages) => {
 
-
-
-
-        const thumbImagesToRender = [...images].map(image => (
+        const thumbImagesToRender = [...thumbImages].map(image => (
             <SplideSlide
-                key={image}>
+                key={image + 'thumb'}>
                 <img
                     src={image}
                     alt="user img" />
-            </SplideSlide>))
+            </SplideSlide>
+        ))
 
-        return thumbImagesToRender;
+        return thumbImagesToRender
+
+
     }
 
 
@@ -50,51 +48,54 @@ const SliderWithThumb = ({ userImages }) => {
 
         fullImgSlider.current.sync(thumbImgSlider.current.splide)
 
-    }, [images])
-
-
+    }, [userImages])
 
 
     return (
-        <div className='user-img-container'>
-            <h1>slider w thum</h1>
-            <Splide
-                id="fullImgSlider"
-                ref={fullImgSlider}
-                options={{
-                    type: 'fade',
-                    rewind: true,
-                    pagination: false,
-                    arrows: false,
-                }}
-            >
-                {FullSliderImgs(images)}
-            </Splide>
-            <Splide
-                id="thumbImgSlider"
-                ref={thumbImgSlider}
-                options={{
-                    fixedWidth: 100,
-                    fixedHeight: 100,
-                    gap: 10,
-                    rewind: true,
-                    pagination: false,
-                    cover: true,
-                    isNavigation: true,
-                    breakpoints: {
-                        600: {
-                            fixedWidth: 60,
-                            fixedHeight: 44,
+        <div className='user-img-wrapper'>
+            <div className='user-img-container'>
+                <Splide
+                    id="fullImgSlider"
+                    ref={fullImgSlider}
+                    options={{
+                        fixedWidth: 400,
+                        fixedHeight: 400,
+                        cover: true,
+                        reactive: true,
+                        type: 'slide',
+                        rewind: true,
+                        pagination: false,
+                        arrows: false,
+                    }}
+                >
+                    {FullSliderImgs(images)}
+                </Splide>
+            </div >
+            <div className={` ${userImages.length} user-thumb-container  ${userImages.length <= 1 && 'hide'}`}>
+                <Splide
+                    id="thumbImgSlider"
+                    ref={thumbImgSlider}
+                    options={
+                        {
+                            fixedWidth: 100,
+                            fixedHeight: 100,
+                            gap: 10,
+                            rewind: true,
+                            pagination: false,
+                            cover: true,
+                            isNavigation: true,
+                            breakpoints: {
+                                600: {
+                                    fixedWidth: 60,
+                                    fixedHeight: 44,
+                                }
+                            }
                         }
                     }
-                }
-
-                }
-            >
-                {ThumbSliderImgs(images)}
-
-            </Splide>
-
+                >
+                    {ThumbSliderImgs(images)}
+                </Splide>
+            </div>
         </div >
     );
 }

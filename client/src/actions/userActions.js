@@ -9,6 +9,7 @@ import config from "../config";
 
 export const isLogged = () => async (dispatch) => {
     
+    console.log('islogged check');
     
     dispatch({
         type: 'userDataLoading',

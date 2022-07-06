@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { matchUpdate } from '../actions/userActions'
 import MatchedUserPage from "../components/MatchedUserPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDays, faCakeCandles, faMars, faVenus, faVenusMars } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarDays, faCakeCandles, faMars, faVenus, faVenusMars, faAnglesLeft, faAnglesRight, faChev } from '@fortawesome/free-solid-svg-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { divContainerVariants, pageContainerVariants } from '../animations/motion'
 
@@ -88,7 +88,11 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
       animate='visible'
       exit='exit'
       key={'dashboardpagekey'}>
+      <div className='swipe-info-left'>
+        <div><span>Swipe left to forget</span></div>
+        <div>{<FontAwesomeIcon icon={faAnglesLeft} />}</div>
 
+      </div>
       <div className='cardContainer'
       >
         {sortCharacters(characters).map((character) =>
@@ -99,7 +103,7 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
             onCardLeftScreen={() => outOfFrame(character.firstName)}
             preventSwipe={['up', 'down']}>
             <div
-              style={{ backgroundImage: 'url(' + character.imgUrl + ')' }} className='card'>
+              style={{ backgroundImage: 'url(' + character.imgUrl[0] + ')' }} className='card'>
             </div>
             <div className='tinder-card-character-info'>
               <div className='card-header'>
@@ -114,9 +118,10 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
         )}
       </div>
 
-      <div className='swipe-info'>
-        <span>{`<<`}Swipe left to forget</span>
-        <span>Swipe right to match{`>>`}</span>
+
+      <div className='swipe-info-right'>
+        <div><div>{<FontAwesomeIcon icon={faAnglesRight} />}</div></div>
+        <div><span>Swipe right to match</span></div>
       </div>
     </motion.div>
   );

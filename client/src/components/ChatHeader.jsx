@@ -14,7 +14,7 @@ const ChatHeader = ({ activeMatch }) => {
         if (!id) {
             return blankUser
         } else {
-            return users[users.findIndex((user) => activeMatch === user._id)].imgUrl
+            return users[users.findIndex((user) => activeMatch === user._id)].imgUrl[0]
         }
     }
 
@@ -29,7 +29,7 @@ const ChatHeader = ({ activeMatch }) => {
                             initial='hidden'
                             animate='visible'
                             exit='exit'
-                            src={userData.imgUrl} alt="" />
+                            src={userData.imgUrl[0]} alt="" />
                     </AnimatePresence>
                 </div>
                 <div><span>talk with</span></div>
