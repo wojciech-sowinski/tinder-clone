@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import LogInInfo from "../components/LoginInfo";
 import UploadImg from "../components/UploadImg";
-import blankImg from '../img/blank-profile-picture.png'
 import '../styles/onBoardPage.scss'
-import config from "../config";
-import { isLogged } from "../actions/userActions";
+import { userDataUpdate } from "../actions/userActions";
 import { motion } from 'framer-motion'
 import { pageContainerVariants } from '../animations/motion'
 import SliderWithThumb from "../components/SliderWithThumb";
@@ -38,7 +36,6 @@ const OnBoardPage = () => {
     }
     const [formData, setFormData] = useState(initialFormData)
     const [updateResult, setUpdateResult] = useState('Submit Changes')
-    const [images, setImages] = useState(userData.imgUrl)
 
 
     const handleFirstNameChange = (e) => {
@@ -65,9 +62,6 @@ const OnBoardPage = () => {
     }
     const handleGenderChoose = (e) => {
         e.preventDefault()
-
-
-
         switch (e.currentTarget.innerText) {
             case "Male":
                 setFormData((prev) => {
@@ -86,7 +80,6 @@ const OnBoardPage = () => {
                     }
                 })
                 break;
-
             default:
                 break;
         }
@@ -126,7 +119,7 @@ const OnBoardPage = () => {
         }
     }
     const handleAboutMeChange = (e) => {
-        console.log(e.target.value.length);
+
         if (e.target.value.length <= 200) {
             setFormData((prev) => {
                 return {
@@ -134,10 +127,7 @@ const OnBoardPage = () => {
                     aboutMe: e.target.value
                 }
             })
-
         }
-
-
     }
 
     const submitHandle = (e) => {
@@ -145,46 +135,16 @@ const OnBoardPage = () => {
 
         const { firstName, birthDate, gender, interest, aboutMe, email } = formData
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ firstName, birthDate, gender, interest, aboutMe, email })
-        };
-
-        fetch(config.serverUrl + 'user', requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-            })
-            .then(data => {
-                if (data.result === 'user data updated') {
-                    // dispatch({type:'setUserData',payload:formData})
-                    dispatch(isLogged())
-                    setUpdateResult('Changes Saved')
-                    setTimeout(() => {
-                        setUpdateResult('Submit Changes')
-                    }, 2000);
-                }
-            })
+        dispatch(userDataUpdate({ firstName, birthDate, gender, interest, aboutMe, email }))
     }
 
 
 
     const UserProfileForm = () => {
-
-
-
         return (
-
             <>
-
                 <h1>Your Profile</h1>
-
-
                 <form onSubmit={submitHandle}>
-
                     <div className="first-col">
                         <div>
                             <label>First Name</label>
@@ -269,19 +229,15 @@ const OnBoardPage = () => {
                             {<UploadImg />}
                         </div>
                         <div>
-
-                            <SliderWithThumb userImages={userData.imgUrl} />
+                            <SliderWithThumb userImages={userData.imgUrl} editable={true} />
                         </div>
                         <div style={{ textAlign: "center" }}>
                             <button className="submit-button" type="submit">{updateResult}</button>
                         </div>
                     </div>
-
                 </form>
-
             </>
         )
-
     }
 
 
@@ -300,15 +256,10 @@ const OnBoardPage = () => {
     return (
         <>
             <motion.div className="on-board-page"
-
                 variants={pageContainerVariants}
                 initial='hidden'
                 animate='visible'
                 exit='exit'
-
-
-
-
             >
                 {!logged ? <LogInInfo /> : UserProfileForm()}
             </motion.div>

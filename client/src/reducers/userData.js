@@ -17,7 +17,8 @@ const userData = (state = initialState, action) => {
                 ...state,
                 userDataLoading:action.payload
             }
-
+        case 'userDataUpdate':
+            return state;
         case 'matchUpdate':
             return state;
         case 'login':
@@ -26,20 +27,15 @@ const userData = (state = initialState, action) => {
             } else {
                 return initialState
             }
-
-
         case 'setUserData':
             return action.payload;
-
-        case 'isLogged':
-               
+        case 'isLogged':               
                 if (action.payload.logged) {
                     return action.payload
                 } else {
                     return initialState
                 }
                 case 'logOut':
-
                     const requestOptions = {
                         method: 'GET',
                         headers: {
@@ -47,7 +43,6 @@ const userData = (state = initialState, action) => {
                         },
                         credentials: 'include'
                     };
-
                     fetch(config.serverUrl + "logout", requestOptions)
 
                     return initialState

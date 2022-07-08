@@ -6,16 +6,63 @@ import {
 import config from "../config";
 
 
+export const deleteUserImg = (fileName)=> async (dispatch)=>{
+console.log('click del image',fileName);
 
-export const isLogged = () => async (dispatch) => {
-    
-    console.log('islogged check');
-    
+    try {
+        
+        await axios.post(config.serverUrl + 'deluserimg',{fileName},{
+            withCredentials: true
+        })
+        .then(resolve => {
+            if(resolve.status===200){
+                
+                dispatch(isLogged())
+            }
+        })
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+}
+
+export const userDataUpdate = (dataToUpd) => async (dispatch) =>{
     dispatch({
         type: 'userDataLoading',
         payload: true
     })
 
+    try {
+        await axios.post(config.serverUrl + 'user', 
+            dataToUpd
+        , {
+            withCredentials: true
+        })
+        .then(resolve => {
+            if (resolve.status == 200) {              
+                if (resolve.data.result === 'user data updated') {                    
+                    dispatch(isLogged()) 
+                    dispatch({
+                        type: 'userDataLoading',
+                        payload: false
+                    })                              
+                    }
+            }
+        })
+        
+        
+    } catch (error) {
+        console.log(error);        
+    }
+}
+
+export const isLogged = () => async (dispatch) => {
+    dispatch({
+        type: 'userDataLoading',
+        payload: true
+    })
     try {
 
         const response = await axios.get(config.serverUrl + 'isLogged', {
@@ -46,7 +93,7 @@ export const isLogged = () => async (dispatch) => {
 
 
 export const matchUpdate = (userId, matchId) => async (dispatch) => {
-    console.log('matchupd call');
+    
 
     try {
 

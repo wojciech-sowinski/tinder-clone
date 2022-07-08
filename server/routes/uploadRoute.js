@@ -16,7 +16,7 @@ const whitelist = [
 
 const fileStorageEngine = multer.diskStorage({
     destination : (req,file,cb)=>{
-        cb(null,'./imguploads')
+        cb(null,'./userimgs')
     },filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
       }
@@ -36,6 +36,9 @@ const upload = multer({
 
 
 router.use(json())
+
+
+
 
 router.post('/upload',upload.single("image"), (req,res)=>{
 console.log(req.file);

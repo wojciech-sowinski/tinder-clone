@@ -2,16 +2,25 @@ import { useState, useEffect, useRef } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '../styles/sliderWithThumb.scss';
 import blankImg from '../img/blank-profile-picture.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { deleteUserImg } from '../actions/userActions'
+import {
+    useDispatch
+} from "react-redux";
 
 
-const SliderWithThumb = ({ userImages }) => {
+const SliderWithThumb = ({ userImages, editable }) => {
 
+    const dispatch = useDispatch()
     const images = userImages.length ? userImages : [blankImg]
 
 
 
     const fullImgSlider = useRef();
     const thumbImgSlider = useRef();
+
+
 
     const FullSliderImgs = (fullImages) => {
 
@@ -21,6 +30,9 @@ const SliderWithThumb = ({ userImages }) => {
                 <img
                     src={image}
                     alt="user img" />
+                {(editable && image !== blankImg) && (<button onClick={() => {
+                    dispatch(deleteUserImg(image))
+                }} className='image-delete-button'><FontAwesomeIcon icon={faTrashCan} /></button>)}
             </SplideSlide>))
 
         return fullImagesToRender;
@@ -34,6 +46,10 @@ const SliderWithThumb = ({ userImages }) => {
                 <img
                     src={image}
                     alt="user img" />
+                {(editable && image !== blankImg) && (<button onClick={() => {
+                    dispatch(deleteUserImg(image))
+                }} className='image-delete-button'><FontAwesomeIcon icon={faTrashCan} /></button>)}
+
             </SplideSlide>
         ))
 
@@ -58,7 +74,7 @@ const SliderWithThumb = ({ userImages }) => {
                     id="fullImgSlider"
                     ref={fullImgSlider}
                     options={{
-                        fixedWidth: 400,
+                        fixedWidth: '100%',
                         fixedHeight: 400,
                         cover: true,
                         reactive: true,

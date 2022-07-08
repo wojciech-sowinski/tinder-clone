@@ -53,6 +53,7 @@
   list-style-type: none !important;
   margin: 0;
   position: relative;
+  text-align: right;
 }
 .splide__slide img {
   vertical-align: bottom;
@@ -652,4 +653,22 @@
   padding: 1em 0;
   right: 0.5em;
   top: 0;
+}
+
+button.image-delete-button {
+  margin: 3px;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 25px;
+  border: none;
+  background-color: rgb(201, 0, 50);
+  color: #fff;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    opacity: 1;
+  }
 }

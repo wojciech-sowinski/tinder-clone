@@ -5,8 +5,42 @@ const User = require('../models/user')
 const Message = require('../models/message')
 
 
+router.post('/deluserimg',(req,res)=>{
+    if (req.session.authToken) {
+        console.log(req.body);
+        const deleteUserImg = User.findOneAndUpdate(req.session.authToken,{
+            $pull:{
+                imgUrl:req.body.fileName
+            }
+        })
+        deleteUserImg.exec((err,data)=>{
+            if(err){
+                console.log(err);
+                
+            }
+            if(data){
+                console.log(data);
+                
+                res.json({
+                    result: "img deleted"
+                })
+            }else{
+                res.json({
+                    result: "img delete faile"
+                })
+            }
+        })
+
+
+
+    }else{
+        redirect('/islogged')
+    }
+    
+})
+
 router.post('/register', (req, res) => {
-    console.log(req.body);
+   
     const userExistsFind = User.findOne({
         email: req.body.email
     })
@@ -33,9 +67,6 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-
-    console.log(req.body);
-
 
     const {
         email,
@@ -105,9 +136,8 @@ router.get('/logout', (req, res) => {
     res.redirect('islogged')
 })
 
-
 router.post('/user', (req, res) => {
-    
+       
     if (req.session.authToken) {
         
         const userDataUpdate = User.findByIdAndUpdate(req.session.authToken, req.body)
