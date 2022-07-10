@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import config from '../config'
+import { useSelector } from 'react-redux'
 import blankUser from '../img/blank-profile-picture.png'
 import { motion, AnimatePresence } from 'framer-motion'
-import { divContainerVariants, divFlipContainerVariants } from '../animations/motion';
+import { divContainerVariants } from '../animations/motion';
 
 const ChatHeader = ({ activeMatch }) => {
 
-    const { logged, userData } = useSelector(state => state.userData)
+    const { userData } = useSelector(state => state.userData)
     const { users } = useSelector(state => state.users)
 
     const guestImgUrl = (id) => {
@@ -29,7 +27,7 @@ const ChatHeader = ({ activeMatch }) => {
                             initial='hidden'
                             animate='visible'
                             exit='exit'
-                            src={userData.imgUrl[0]} alt="" />
+                            src={userData.imgUrl[0]} alt="user img" />
                     </AnimatePresence>
                 </div>
                 <div><span>talk with</span></div>
@@ -39,8 +37,7 @@ const ChatHeader = ({ activeMatch }) => {
                             className='match-thumb-img'
                             key={activeMatch}
                             src={guestImgUrl(activeMatch)}
-                            alt=""
-
+                            alt="user img"
                             variants={divContainerVariants}
                             initial='hidden'
                             animate='visible'

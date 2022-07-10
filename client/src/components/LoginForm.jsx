@@ -1,13 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import '../styles/loginForm.scss'
-import config from '../config'
 import RegisterButton from './RegisterButton';
-import axios from 'axios';
-import DataLoader from './DataLoader';
 import { login } from '../actions/userActions';
 import { motion, AnimatePresence } from 'framer-motion'
-import { divContainerVariants, pageContainerVariants, divFlipHorizontalWithResize } from '../animations/motion'
+import { divFlipHorizontalWithResize } from '../animations/motion'
 
 
 
@@ -20,15 +17,8 @@ const LoginForm = () => {
     }
 
     const [loginFormData, setLoginFormData] = useState(initialLoginFormState)
-
-
-    const { showModal, formType } = useSelector(state => state.modalReducer)
-    const { userData, logged, resultInfo } = useSelector(state => state.userData)
+    const { resultInfo } = useSelector(state => state.userData)
     const dispatch = useDispatch()
-
-    useEffect(() => {
-
-    }, [])
 
     const inputLoginHandle = (e) => {
         setLoginFormData(prev => {
@@ -50,21 +40,14 @@ const LoginForm = () => {
     }
 
     const submitHandle = (e) => {
-
         e.preventDefault()
         const { email, password, info } = loginFormData;
 
-
         dispatch(login({ email, password }))
-
-
-
-
     }
 
 
     return (
-
         <>
             <form onSubmit={submitHandle} id="login-form">
                 <div>
@@ -115,10 +98,7 @@ const LoginForm = () => {
                     <h4>Don't have Account? Create New.</h4>
                 </div>
                 <RegisterButton />
-
-
             </form>
-
         </>
     );
 }

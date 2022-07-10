@@ -19,7 +19,7 @@ const VerticalUserCarousel = ({ users, speed, slideSize, imgNum, direction, info
                 heightRatio: 1,
                 // lazyLoad: 'nearby',
                 preloadPages: 3,
-
+                clones: 10,
                 arrows: false,
                 pagination: false,
                 cover: true,
@@ -32,12 +32,10 @@ const VerticalUserCarousel = ({ users, speed, slideSize, imgNum, direction, info
             }}
             extensions={{ AutoScroll }}
         >
-            {console.log('rendering vert slider')}
             {users.filter(user => user.imgUrl[imgNum]).map(user => {
                 return (
-                    <SplideSlide key={user.imgUrl[imgNum]}>
+                    <SplideSlide key={user.imgUrl[imgNum] + Math.random()} >
                         <img src={user.imgUrl[imgNum]} alt="user img" />
-
                     </SplideSlide>
                 )
             })}

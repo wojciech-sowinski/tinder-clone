@@ -1,30 +1,18 @@
-const messages = (state = {
+const initialState ={
     loading: false,
     messages: []
-}, action) => {
+}
 
-
-
-
+const messages = (state = initialState, action) => {
     switch (action.type) {
-
-
-
-        //================================================
         case 'fetchMessages':
-
             return action.payload;
-
-
-
-        case 'sendMessage':
-            console.log(action.payload);
+        case 'sendMessage':         
             return {
                 ...state,
                 messages: [...state.messages, action.payload]
             }
             case 'msgDisplayed':
-
                 return state;
             default:
                 return state;

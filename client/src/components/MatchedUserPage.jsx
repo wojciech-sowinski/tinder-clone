@@ -1,9 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDays, faCakeCandles, faMars, faVenus, faVenusMars } from '@fortawesome/free-solid-svg-icons'
+import { faMars, faVenus, faVenusMars } from '@fortawesome/free-solid-svg-icons'
 import '../styles/matchedUserPage.scss'
-import { motion, AnimatePresence } from 'framer-motion'
-import { divContainerVariants, pageContainerVariants } from '../animations/motion'
+import { motion } from 'framer-motion'
+import { divContainerVariants } from '../animations/motion'
 import SliderWithThumb from './SliderWithThumb'
 
 const MatchedUserPage = ({ activeMatch }) => {
@@ -13,13 +13,10 @@ const MatchedUserPage = ({ activeMatch }) => {
 
 
     const characterAge = (birthDate) => {
-
         return (new Date().getFullYear()) - (new Date(birthDate).getFullYear())
-
     }
 
     const genderSign = (gender) => {
-
         switch (gender) {
             case 'Female':
                 return <FontAwesomeIcon icon={faVenus} />
@@ -27,11 +24,9 @@ const MatchedUserPage = ({ activeMatch }) => {
                 return <FontAwesomeIcon icon={faMars} />
             case 'Everyone':
                 return <FontAwesomeIcon icon={faVenusMars} />
-
             default:
                 break;
         }
-
     }
 
 
@@ -42,13 +37,10 @@ const MatchedUserPage = ({ activeMatch }) => {
             initial='hidden'
             animate='visible'
             exit='exit'>
-
-
             <div className='match-user-imgs'>
                 <SliderWithThumb userImages={imgUrl} />
             </div>
             <div className='match-user-info'>
-
                 <h2 > {firstName} </h2>
                 <div className='match-user-info-bar'>
                     <span>Age: <span className='match-user-age-span'>{` ${characterAge(birthDate)}`}</span></span>
@@ -59,18 +51,13 @@ const MatchedUserPage = ({ activeMatch }) => {
                         Interest: {genderSign(interest)}
                     </span>
                 </div>
-
                 <div className='about-me-container'>
                     <h4>
                         About me:
                     </h4>
                     <p>{aboutMe}</p>
                 </div>
-
             </div>
-
-
-
         </motion.div>
     );
 }

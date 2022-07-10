@@ -10,13 +10,10 @@ import '../styles/dragAndDrop.scss'
 
 function UploadImg() {
 
-    const [file, setFile] = useState()
     const [uploading, setUploading] = useState(false)
     const dispatch = useDispatch()
 
-
     const fileTypes = ["JPG", "JPEG", "PNG", "GIF", "WEBP"];
-
 
     const handleChange = async (file) => {
 
@@ -30,20 +27,10 @@ function UploadImg() {
         setUploading(true)
 
         const compressedFile = await imageCompression(file, compresionOptions);
-
-
-
-
         const formData = new FormData();
-
-
-
         formData.append('image', compressedFile);
 
-
-
         axios({
-
             method: 'post',
             url: 'http://localhost:5000/upload',   //addyoururl
             data: formData,
@@ -51,27 +38,18 @@ function UploadImg() {
             withCredentials: true
         })
             .then(result => {
-
                 if (result.status === 200) {
-
                     setUploading(false)
-
                     if (result.data.uploadResult) {
                         dispatch(isLogged())
-
                     } else {
                         alert('Upload file error')
                         setUploading(false)
                     }
-
-
-
-
                 } else {
                     setUploading(false)
                 }
             });
-
     };
 
 
@@ -79,8 +57,6 @@ function UploadImg() {
         <>
             {uploading ? <DataLoader text={'Uploading image'} /> : null}
             <FileUploader classes={'drag-and-drop'} handleChange={handleChange} name="file" types={fileTypes} hoverTitle="drop file here" />
-
-
         </>
     );
 }

@@ -8,7 +8,6 @@ import users from './users'
 import newMessages from './newMessages'
 import dataLoaderReducer from './dataLoaderReducer'
 
-
 const rootReducer = combineReducers({
     modalReducer,
     userData,
@@ -17,6 +16,5 @@ const rootReducer = combineReducers({
     newMessages,
     dataLoaderReducer
 })
-
 
 export default rootReducer

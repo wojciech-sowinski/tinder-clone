@@ -1,28 +1,23 @@
 import TinderCard from 'react-tinder-card'
 import { useEffect, useState } from 'react'
-import config from '../config'
 import { useSelector, useDispatch } from 'react-redux'
 import { matchUpdate } from '../actions/userActions'
-import MatchedUserPage from "../components/MatchedUserPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDays, faCakeCandles, faMars, faVenus, faVenusMars, faAnglesLeft, faAnglesRight, faChev } from '@fortawesome/free-solid-svg-icons'
-import { motion, AnimatePresence } from 'framer-motion'
-import { divContainerVariants, pageContainerVariants } from '../animations/motion'
+import { faCakeCandles, faMars, faVenus, faVenusMars, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion'
+import { divContainerVariants } from '../animations/motion'
 
 
 const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
 
-  const { users, usersDataLoading } = useSelector(state => state.users)
+  const { users } = useSelector(state => state.users)
   const [characters, setCharacters] = useState(users)
   const dispatch = useDispatch()
-  const { logged, userData } = useSelector(state => state.userData)
-
-
-
-
+  const { userData } = useSelector(state => state.userData)
   const [lastDirection, setLastDirection] = useState()
 
   const addMatch = (id) => {
+
     const userMatches = [...userData.matches]
 
     if (userMatches.findIndex((match) => match === id) > -1) {
@@ -30,8 +25,6 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
     } else {
       dispatch(matchUpdate(userData._id, id))
     }
-
-
   }
 
   const sortCharacters = (data) => {
@@ -53,11 +46,9 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
         return <FontAwesomeIcon icon={faMars} />
       case 'Both':
         return <FontAwesomeIcon icon={faVenusMars} />
-
       default:
         break;
     }
-
   }
 
   const swiped = (direction, nameToDelete) => {
@@ -73,9 +64,7 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
   }
 
   const characterAge = (birthDate) => {
-
     return (new Date().getFullYear()) - (new Date(birthDate).getFullYear())
-
   }
 
   useEffect(() => {
@@ -92,7 +81,6 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
       <div className='swipe-info-left'>
         <div><span>Swipe left to forget</span></div>
         <div>{<FontAwesomeIcon icon={faAnglesLeft} />}</div>
-
       </div>
       <div className='cardContainer'
       >
@@ -118,8 +106,6 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
           </TinderCard>
         )}
       </div>
-
-
       <div className='swipe-info-right'>
         <div><div>{<FontAwesomeIcon icon={faAnglesRight} />}</div></div>
         <div><span>Swipe right to match</span></div>

@@ -1,7 +1,7 @@
 import Loader from "react-js-loader";
 import '../styles/dataLoader.scss'
 import { motion, AnimatePresence } from 'framer-motion'
-import { divContainerVariants, pageContainerVariants } from '../animations/motion'
+import { divContainerVariants } from '../animations/motion'
 
 const DataLoader = ({ text }) => {
     return (

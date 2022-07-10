@@ -1,6 +1,5 @@
 import config from "../config";
 
-
 const initialState = {
     logged: false,
     userData: {},
@@ -8,13 +7,10 @@ const initialState = {
     resultInfo:''
 }
 
-
-const userData = (state = initialState, action) => {
-   
+const userData = (state = initialState, action) => {   
     switch (action.type) {
         case 'register':            
             return {...initialState,resultInfo:action.payload}
-
         case 'userDataLoading':
             return {
                 ...state,
@@ -32,9 +28,7 @@ const userData = (state = initialState, action) => {
             }
         case 'setUserData':
             return action.payload;
-        case 'isLogged':               
-
-        
+        case 'isLogged': 
                 if (action.payload.logged) {
                     return action.payload
                 } else {
@@ -49,9 +43,7 @@ const userData = (state = initialState, action) => {
                         credentials: 'include'
                     };
                     fetch(config.serverUrl + "logout", requestOptions)
-
                     return initialState
-
                 default:
                     return state;
     }

@@ -6,7 +6,7 @@ import SwipeContainer from '../components/SwipeContainer'
 import ChatContainer from '../components/ChatContainer'
 import MatchedUserPage from "../components/MatchedUserPage";
 import { motion, AnimatePresence } from 'framer-motion'
-import { pageContainerVariants, divContainerVariants } from '../animations/motion'
+import { pageContainerVariants } from '../animations/motion'
 
 import '../styles/dashboardPage.scss'
 
@@ -27,11 +27,7 @@ const DashboardPage = () => {
             email, imgUrl
         } = userData
 
-
-
         if (logged) {
-
-
             if (firstName &&
                 birthDate &&
                 gender &&
@@ -47,16 +43,9 @@ const DashboardPage = () => {
             } else {
                 return <OnboardInfo />
             }
-
-
-
-
-
-
         } else {
             return <LogInInfo />
         }
-
     }
 
 
@@ -76,9 +65,7 @@ const DashboardPage = () => {
             exit='exit'
             key={'dashboardpagekey'}
         >
-
             {dashboardPageRender(logged)}
-
         </motion.div>
     );
 }

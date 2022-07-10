@@ -11,7 +11,6 @@ import SliderWithThumb from "../components/SliderWithThumb";
 
 const OnBoardPage = () => {
 
-
     const { userData, logged, userDataLoading } = useSelector(state => state.userData)
 
     const { firstName,
@@ -23,7 +22,6 @@ const OnBoardPage = () => {
     } = userData
 
     const dispatch = useDispatch()
-
 
     const initialFormData = {
         firstName: '',
@@ -96,7 +94,6 @@ const OnBoardPage = () => {
                 })
                 break;
             case "Female":
-
                 setFormData((prev) => {
                     return {
                         ...prev,
@@ -105,7 +102,6 @@ const OnBoardPage = () => {
                 })
                 break;
             case "Everyone":
-
                 setFormData((prev) => {
                     return {
                         ...prev,
@@ -113,13 +109,11 @@ const OnBoardPage = () => {
                     }
                 })
                 break;
-
             default:
                 break;
         }
     }
     const handleAboutMeChange = (e) => {
-
         if (e.target.value.length <= 200) {
             setFormData((prev) => {
                 return {
@@ -132,9 +126,7 @@ const OnBoardPage = () => {
 
     const submitHandle = (e) => {
         e.preventDefault()
-
         const { firstName, birthDate, gender, interest, aboutMe, email } = formData
-
         dispatch(userDataUpdate({ firstName, birthDate, gender, interest, aboutMe, email }))
     }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '../styles/sliderWithThumb.scss';
 import blankImg from '../img/blank-profile-picture.png'
@@ -8,19 +8,14 @@ import { deleteUserImg } from '../actions/userActions'
 import {
     useDispatch
 } from "react-redux";
-// import '@splidejs/react-splide/css/sea-green';
+
 
 const SliderWithThumb = ({ userImages, editable }) => {
 
     const dispatch = useDispatch()
     const images = userImages.length ? userImages : [blankImg]
-
-
-
     const fullImgSlider = useRef();
     const thumbImgSlider = useRef();
-
-
 
     const FullSliderImgs = (fullImages) => {
 
@@ -49,21 +44,15 @@ const SliderWithThumb = ({ userImages, editable }) => {
                 {(editable && image !== blankImg) && (<button onClick={() => {
                     dispatch(deleteUserImg(image))
                 }} className='image-delete-button'><FontAwesomeIcon icon={faTrashCan} /></button>)}
-
             </SplideSlide>
         ))
 
         return thumbImagesToRender
-
-
     }
 
 
     useEffect(() => {
-
-
         fullImgSlider.current.sync(thumbImgSlider.current.splide)
-
     }, [userImages])
 
 
@@ -117,35 +106,3 @@ const SliderWithThumb = ({ userImages, editable }) => {
 }
 
 export default SliderWithThumb;
-
-
-
-
-
-
-// const imagesToRender = [...userData.imgUrl]
-// const userImgsSlides = [];
-
-
-// if (imagesToRender.length) {
-
-
-//     imagesToRender.forEach(image => (
-//         userImgsSlides.push(<SplideSlide><img src={image} alt="user img" /></SplideSlide>)
-//     ))
-
-
-
-
-// } else {
-
-//     userImgsSlides.push(<SplideSlide><img src={blankImg} alt="blank user img" /></SplideSlide>)
-
-// }
-
-// return (
-//     <Splide className="user-img-container" options={{ rewind: true }} aria-label="React Splide Example">
-
-//         {userImgsSlides}
-//     </Splide>
-// )

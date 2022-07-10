@@ -1,5 +1,4 @@
-const dataLoaderReducer = (state=false,action) => {
-    
+const dataLoaderReducer = (state=false,action) => {    
     switch (action.type) {
         case 'loaderON':            
             return true;
@@ -8,7 +7,6 @@ const dataLoaderReducer = (state=false,action) => {
         default:
             return state;
     }
-
 }
  
 export default dataLoaderReducer;

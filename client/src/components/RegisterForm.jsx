@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import '../styles/registerForm.scss'
-import config from '../config';
 import { useSelector, useDispatch } from 'react-redux'
-import DataLoader from './DataLoader';
 import { register } from '../actions/userActions.js'
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
-import { divContainerVariants, pageContainerVariants, divFlipHorizontalWithResize } from '../animations/motion'
+import { divFlipHorizontalWithResize } from '../animations/motion'
 
 const RegisterForm = () => {
 
@@ -18,13 +16,8 @@ const RegisterForm = () => {
     }
 
     const [registerFormData, setRegisterFormData] = useState(initialRegisterFormState)
-
-    const { showModal, formType } = useSelector(state => state.modalReducer)
-    const { userData, logged, resultInfo } = useSelector(state => state.userData)
+    const { userData, resultInfo } = useSelector(state => state.userData)
     const dispatch = useDispatch()
-
-
-
 
     const inputLoginHandle = (e) => {
         setRegisterFormData(prev => {
@@ -43,7 +36,6 @@ const RegisterForm = () => {
         })
     }
     const inputPasswordConfirmHandle = (e) => {
-
         if (e.target.value !== registerFormData.password) {
             setRegisterFormData(prev => {
                 return {
@@ -59,7 +51,6 @@ const RegisterForm = () => {
                 }
             })
         }
-
         setRegisterFormData(prev => {
             return {
                 ...prev,
@@ -71,7 +62,7 @@ const RegisterForm = () => {
     const handleRegisterSubmit = (e) => {
 
         e.preventDefault()
-        const { email, password, passwordConfirm, info } = registerFormData
+        const { email, password, passwordConfirm } = registerFormData
 
         if (password !== passwordConfirm) {
             dispatch({ type: 'register', payload: 'Pasword and password confirmation must be the same.' })
@@ -89,7 +80,6 @@ const RegisterForm = () => {
     }, [userData, resultInfo])
 
     return (
-
         <>
             <form onSubmit={handleRegisterSubmit} id="register-form">
                 <div>
@@ -133,7 +123,6 @@ const RegisterForm = () => {
                         id="register-submit-input"
                         className='sign-in-button' />
                 </div>
-
                 <div>
                     <AnimatePresence>
                         {resultInfo ? (<motion.h2
@@ -147,10 +136,7 @@ const RegisterForm = () => {
                         </motion.h2>) : ''}
                     </AnimatePresence>
                 </div>
-
-
             </form>
-
         </>
     );
 }
