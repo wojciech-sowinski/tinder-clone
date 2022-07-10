@@ -3,15 +3,15 @@ import { useEffect } from 'react'
 import { msgDisplayed } from '../actions/messagesActions'
 
 const Message = ({ from, to, created, body, last, displayed, msgId }) => {
-    const users = useSelector(state => state.users)
+    const { users } = useSelector(state => state.users)
     const { logged, userData } = useSelector(state => state.userData)
     const dispatch = useDispatch()
 
     const userAvatarImg = (id) => {
 
-        const userImg = users[users.findIndex(user => user._id === id)].imgUrl
+        const userImg = users[users.findIndex(user => user._id === id)].imgUrl[0]
 
-        return userImg[0]
+        return userImg
     }
 
     const displayDate = () => {

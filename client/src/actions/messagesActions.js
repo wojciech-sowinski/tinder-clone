@@ -38,7 +38,7 @@ export const fetchMessages = (prevMessages) => async (dispatch) => {
     })
 
     if (resolve.status == 200) {
-        setTimeout(() => {
+        
 
             dispatch({
                 type: 'fetchMessages',
@@ -47,7 +47,7 @@ export const fetchMessages = (prevMessages) => async (dispatch) => {
                     messages: resolve.data
                 }
             })
-        }, 2000);
+        
     }
 }
 
@@ -76,8 +76,7 @@ export const fetchNewMessageCount = () => async (dispatch) => {
 
 
 export const msgDisplayed = (from, to) => async (dispatch) => {
-    console.log('msgdisplayed dfromn actions');
-
+  
     try {
         axios.post(config.serverUrl + 'msgdisplayed', {
             from,
@@ -89,42 +88,3 @@ export const msgDisplayed = (from, to) => async (dispatch) => {
         console.log(error);
     }
 }
-
-
-// case 'msgDisplayed':
-
-// fetch(config.serverUrl + 'msgdisplayed', {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     credentials: 'include',
-//     body: JSON.stringify({
-//         to: action.payload
-//     })
-// })
-
-// next(action)
-
-
-// case 'fetchNewMessageCount':
-//     fetch(config.serverUrl + 'newmsgs', {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             credentials: 'include'
-//         })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json()
-//             }
-//         })
-//         .then(data => {
-//             action.payload = data
-//             let result = next(action);
-
-//             return result;
-//         })
-
-//     break;

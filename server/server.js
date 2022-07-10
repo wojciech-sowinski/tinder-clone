@@ -60,11 +60,11 @@ app.use('/',usersRoute)
 
 app.get('/userimgs/:name',(req,res)=>{
 
-    if (req.session.authToken&&req.params.name){
+    // if (req.session.authToken&&req.params.name){
         
-        res.sendFile(path.join(__dirname,'./userimgs', req.params.name))
-    }
-
+    // }
+    
+    res.sendFile(path.join(__dirname,'./userimgs', req.params.name))
 
 }
 )

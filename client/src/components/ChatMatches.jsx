@@ -8,7 +8,7 @@ const ChatMatches = ({ setActiveMatch, setOption }) => {
 
     const { logged, userData } = useSelector(state => state.userData)
     const { messages, loading } = useSelector(state => state.messages)
-    const users = useSelector(state => state.users)
+    const { users } = useSelector(state => state.users)
 
     const [matchesToRender, setMatchesToRender] = useState([])
 

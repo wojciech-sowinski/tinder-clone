@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { divContainerVariants } from '../animations/motion'
 
 const ChatMessages = ({ activeMatch }) => {
-    const users = useSelector(state => state.users)
+    const { users } = useSelector(state => state.users)
 
     const { logged, userData } = useSelector(state => state.userData)
     const { messages, loading } = useSelector(state => state.messages)

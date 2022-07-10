@@ -1,17 +1,21 @@
 .sign-in-button,
 .login-button,
 .submit-button,
-.register-button {
-    padding: 10px 30px;
-    margin: 10px 0px;
-    font-size: 1rem;
-    font-weight: 100;
-    background: linear-gradient(45deg, rgb(201, 0, 50), rgb(87, 0, 201));
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: .2s linear;
-
-
+.register-button,
+.redirect-button {
+  padding: 10px 30px;
+  margin: 10px 0px;
+  font-size: 1rem;
+  font-weight: 300;
+  background: linear-gradient(
+    45deg,
+    rgb(201, 0, 50),
+    rgb(201, 0, 50),
+    rgb(255, 174, 0)
+  );
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.2s linear;
 }

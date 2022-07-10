@@ -5,6 +5,7 @@ import { FileUploader } from "react-drag-drop-files";
 import DataLoader from '../components/DataLoader'
 import { useDispatch } from 'react-redux';
 import { isLogged } from '../actions/userActions';
+import '../styles/dragAndDrop.scss'
 
 
 function UploadImg() {
@@ -19,21 +20,19 @@ function UploadImg() {
 
     const handleChange = async (file) => {
 
-
         const compresionOptions = {
-            maxSizeMB: 0.1,
-            maxWidthOrHeight: 800,
+            maxSizeMB: 0.2,
+            maxWidthOrHeight: 1200,
             useWebWorker: true,
             fileType: file.type,
         }
 
         setUploading(true)
 
-        console.log('before ', file);
-
         const compressedFile = await imageCompression(file, compresionOptions);
 
-        console.log('after ', compressedFile);
+
+
 
         const formData = new FormData();
 
@@ -52,7 +51,9 @@ function UploadImg() {
             withCredentials: true
         })
             .then(result => {
+
                 if (result.status === 200) {
+
                     setUploading(false)
 
                     if (result.data.uploadResult) {
@@ -60,6 +61,7 @@ function UploadImg() {
 
                     } else {
                         alert('Upload file error')
+                        setUploading(false)
                     }
 
 
@@ -73,18 +75,10 @@ function UploadImg() {
     };
 
 
-
-    function handleSubmit(event) {
-        event.preventDefault()
-
-
-
-    }
-
     return (
         <>
-            {uploading ? <DataLoader /> : null}
-            <FileUploader handleChange={handleChange} name="file" types={fileTypes} hoverTitle="fsdfsd" />
+            {uploading ? <DataLoader text={'Uploading image'} /> : null}
+            <FileUploader classes={'drag-and-drop'} handleChange={handleChange} name="file" types={fileTypes} hoverTitle="drop file here" />
 
 
         </>

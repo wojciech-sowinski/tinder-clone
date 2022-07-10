@@ -1,5 +1,5 @@
 .matched-user-page {
-  max-width: 400px;
+  width: 400px;
   padding: 10px;
   margin: 30px;
   border-radius: 10px;
@@ -12,6 +12,7 @@
   .match-user-info-bar {
     display: flex;
     justify-content: space-evenly;
+    font-size: 0.9rem;
 
     .match-user-age-span {
       color: rgb(201, 0, 50);
@@ -45,8 +46,9 @@
       border: 1px solid rgb(185, 185, 185);
       border-radius: 5px;
       flex-grow: 1;
+      font-size: 0.9rem;
       h4 {
-        font-size: 13px;
+        font-size: 0.7rem;
         margin: 5px 0;
       }
     }

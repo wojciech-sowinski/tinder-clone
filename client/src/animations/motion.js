@@ -23,6 +23,28 @@ export const pageContainerVariants = {
     
 }
 
+export const divScaleIn = {hidden: { 
+    width:0,
+    scale:0
+},
+visible: {
+   width:'auto',
+    scale:1,
+    transition: {
+        
+        duration: 1
+      },
+}, exit: {
+    width:0,
+    scale:0,
+    transition: {
+        
+        duration: .3,
+        
+      }
+    
+},}
+
 export const divContainerVariants = {
     hidden: { 
         opacity:0,
@@ -60,6 +82,30 @@ export const divFlipContainerVariants = {
           },
     }, exit: {
         opacity:0,
+        transform: 'rotateX(90deg)',
+        transition: {
+            
+            duration: 0.4,
+            
+          }
+        
+    },
+}
+
+export const divFlipHorizontalWithResize = {
+    hidden: { 
+        height:0,
+        transform: 'rotateX(90deg)'
+},
+    visible: {
+       height:130,
+        transform: 'rotateX(0deg)',
+        transition: {
+            
+            duration: 0.4
+          },
+    }, exit: {
+        height:0,
         transform: 'rotateX(90deg)',
         transition: {
             

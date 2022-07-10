@@ -6,7 +6,7 @@ import rootReducer from '../reducers/rootReducer'
 import isLoggedMiddleware from './middleware'
 import thunkMiddleware from 'redux-thunk'
 
-const middleware = applyMiddleware(isLoggedMiddleware, thunkMiddleware)
+const middleware = applyMiddleware( thunkMiddleware)
 
 const store = createStore(rootReducer, middleware)
 

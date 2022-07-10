@@ -4,13 +4,16 @@ import config from "../config";
 const initialState = {
     logged: false,
     userData: {},
-    userDataLoading:false
+    userDataLoading:false,
+    resultInfo:''
 }
 
 
 const userData = (state = initialState, action) => {
-
+   
     switch (action.type) {
+        case 'register':            
+            return {...initialState,resultInfo:action.payload}
 
         case 'userDataLoading':
             return {
@@ -25,11 +28,13 @@ const userData = (state = initialState, action) => {
             if (action.payload.logged) {
                 return action.payload
             } else {
-                return initialState
+                return {...initialState,...action.payload}
             }
         case 'setUserData':
             return action.payload;
         case 'isLogged':               
+
+        
                 if (action.payload.logged) {
                     return action.payload
                 } else {

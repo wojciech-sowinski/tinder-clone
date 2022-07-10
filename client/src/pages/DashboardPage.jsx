@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
+import OnboardInfo from "../components/OnboardInfo";
 import LogInInfo from "../components/LoginInfo";
 import SwipeContainer from '../components/SwipeContainer'
 import ChatContainer from '../components/ChatContainer'
@@ -18,16 +19,40 @@ const DashboardPage = () => {
 
     const dashboardPageRender = (logged) => {
 
+        const { firstName,
+            birthDate,
+            gender,
+            interest,
+            aboutMe,
+            email, imgUrl
+        } = userData
+
+
+
         if (logged) {
 
 
+            if (firstName &&
+                birthDate &&
+                gender &&
+                interest &&
+                aboutMe &&
+                email && imgUrl.length) {
+                return <>
+                    <AnimatePresence exitBeforeEnter>
+                        {activeMatch ? <MatchedUserPage key={'matchuserpagekey'} activeMatch={activeMatch} /> : <SwipeContainer key={'swipecontainerkey'} activeMatch={activeMatch} />}
+                    </AnimatePresence>
+                    <ChatContainer activeMatch={activeMatch} setActiveMatch={setActiveMatch} />
+                </>
+            } else {
+                return <OnboardInfo />
+            }
 
-            return <>
-                <AnimatePresence exitBeforeEnter>
-                    {activeMatch ? <MatchedUserPage key={'matchuserpagekey'} activeMatch={activeMatch} /> : <SwipeContainer key={'swipecontainerkey'} activeMatch={activeMatch} />}
-                </AnimatePresence>
-                <ChatContainer activeMatch={activeMatch} setActiveMatch={setActiveMatch} />
-            </>
+
+
+
+
+
         } else {
             return <LogInInfo />
         }

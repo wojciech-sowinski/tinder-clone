@@ -326,18 +326,19 @@
   max-width: 400px;
   aspect-ratio: 1/1;
 }
-.user-thumb-container {
-  padding: 10px 0;
+.user-thumb-container-vertical {
+  padding: 0;
   position: relative;
 
-  max-width: 400px;
-  height: 150px;
+  max-width: 100vh;
+  height: 100%;
 }
 
 .splide__container {
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  max-width: 100vh;
   height: 100%;
 }
 .splide__list {
@@ -345,6 +346,7 @@
   backface-visibility: hidden;
   display: -ms-flexbox;
   display: flex;
+  max-width: 100vh;
   height: 100%;
   margin: 0 !important;
   padding: 0 !important;
@@ -380,7 +382,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding: 0 !important;
 }
 .splide.is-initialized,
 .splide.is-rendered {
@@ -396,6 +397,7 @@
   margin: 0;
   width: 100%;
   height: auto;
+  border-radius: 0 !important;
 }
 .splide__slide img {
   object-fit: cover !important;
@@ -437,7 +439,8 @@
   overflow: hidden;
   position: relative;
   z-index: 0;
-  width: 100%;
+  max-width: 100vh;
+  height: 100vh;
 }
 @keyframes splide-loading {
   0% {
@@ -654,22 +657,4 @@
   padding: 1em 0;
   right: 0.5em;
   top: 0;
-}
-
-button.image-delete-button {
-  margin: 3px;
-  padding: 0;
-  width: 25px;
-  height: 25px;
-  text-align: center;
-  border-radius: 25px;
-  border: none;
-  background-color: rgb(201, 0, 50);
-  color: #fff;
-  opacity: 0.6;
-  cursor: pointer;
-  transition: 0.3s;
-  &:hover {
-    opacity: 1;
-  }
 }

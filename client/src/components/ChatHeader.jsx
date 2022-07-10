@@ -8,7 +8,7 @@ import { divContainerVariants, divFlipContainerVariants } from '../animations/mo
 const ChatHeader = ({ activeMatch }) => {
 
     const { logged, userData } = useSelector(state => state.userData)
-    const users = useSelector(state => state.users)
+    const { users } = useSelector(state => state.users)
 
     const guestImgUrl = (id) => {
         if (!id) {

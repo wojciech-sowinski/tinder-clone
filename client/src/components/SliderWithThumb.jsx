@@ -8,7 +8,7 @@ import { deleteUserImg } from '../actions/userActions'
 import {
     useDispatch
 } from "react-redux";
-
+// import '@splidejs/react-splide/css/sea-green';
 
 const SliderWithThumb = ({ userImages, editable }) => {
 

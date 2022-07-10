@@ -21,6 +21,7 @@ import {
   useDispatch
 } from 'react-redux'
 import { fetchMessages, fetchNewMessageCount } from './actions/messagesActions'
+import { fetchUsersCatalog } from './actions/usersActions';
 import { isLogged } from './actions/userActions'
 
 
@@ -44,9 +45,7 @@ function App() {
 
     dispatch(isLogged())
 
-    dispatch({
-      type: 'fetchUsersCatalog'
-    })
+    dispatch(fetchUsersCatalog())
     dispatch(fetchNewMessageCount())
 
     dispatch(fetchMessages(messages))

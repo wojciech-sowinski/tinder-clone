@@ -1,16 +1,20 @@
 const express = require('express');
 const router = express.Router();
-
+const fs = require('fs');
+const path =require('path')
 const User = require('../models/user')
 const Message = require('../models/message')
 
 
 router.post('/deluserimg',(req,res)=>{
+
+       
+    
     if (req.session.authToken) {
-        console.log(req.body);
-        const deleteUserImg = User.findOneAndUpdate(req.session.authToken,{
+        const file = path.parse(req.body.filePath)
+        const deleteUserImg = User.findByIdAndUpdate(req.session.authToken,{
             $pull:{
-                imgUrl:req.body.fileName
+                imgUrl:req.body.filePath
             }
         })
         deleteUserImg.exec((err,data)=>{
@@ -18,8 +22,15 @@ router.post('/deluserimg',(req,res)=>{
                 console.log(err);
                 
             }
-            if(data){
+            if(data){    
+                
                 console.log(data);
+                fs.unlinkSync(path.normalize("./userimgs/"+file.name),(err)=>{
+                    if(err){
+                        console.log(err);
+                        
+                    }
+                })      
                 
                 res.json({
                     result: "img deleted"
@@ -34,13 +45,13 @@ router.post('/deluserimg',(req,res)=>{
 
 
     }else{
-        redirect('/islogged')
+        res.redirect('/islogged')
     }
     
 })
 
 router.post('/register', (req, res) => {
-   
+    console.log(req.body)
     const userExistsFind = User.findOne({
         email: req.body.email
     })
@@ -93,7 +104,7 @@ router.post('/login', (req, res) => {
 
             req.session = null
 
-            res.redirect('/islogged')
+            res.json({logged:false,resultInfo:'Bad login or password.'})
         }
     })
 
@@ -120,7 +131,8 @@ router.get('/islogged', (req, res) => {
             }
             res.json({
                 logged: true,
-                userData: data
+                userData: data,
+                resultInfo:''
             })
         })
     } else {
@@ -158,7 +170,7 @@ router.post('/user', (req, res) => {
 })
 
 router.post('/matchupd', (req, res) => {
-    console.log(req.body);
+    
     
     const {
         userId,

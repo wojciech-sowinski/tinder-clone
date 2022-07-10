@@ -8,7 +8,7 @@ import SliderWithThumb from './SliderWithThumb'
 
 const MatchedUserPage = ({ activeMatch }) => {
 
-    const users = useSelector(state => state.users)
+    const { users } = useSelector(state => state.users)
     const [{ aboutMe, birthDate, firstName, gender, interest, imgUrl }] = users.filter(user => user._id === activeMatch)
 
 
@@ -25,7 +25,7 @@ const MatchedUserPage = ({ activeMatch }) => {
                 return <FontAwesomeIcon icon={faVenus} />
             case 'Male':
                 return <FontAwesomeIcon icon={faMars} />
-            case 'Both':
+            case 'Everyone':
                 return <FontAwesomeIcon icon={faVenusMars} />
 
             default:

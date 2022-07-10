@@ -1,9 +1,15 @@
-const users = (state = [], action) => {
+const initialState = {
+    usersCatalogLoading:false,
+    users:[]
+}
+
+const users = (state = initialState, action) => {
+    
     switch (action.type) {
 
         case 'fetchUsersCatalog':
 
-            return action.payload;
+            return {...state,...action.payload};
 
         default:
             return state;

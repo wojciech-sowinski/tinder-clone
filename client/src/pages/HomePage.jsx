@@ -1,19 +1,24 @@
-import { useEffect } from 'react'
+import logo from '../img/logo-red.png'
 import { useSelector, useDispatch } from 'react-redux'
 import LoginButton from '../components/LoginButton'
 import RegisterButton from '../components/RegisterButton'
 import '../styles/homePage.scss'
-import { motion } from 'framer-motion'
-import { pageContainerVariants } from '../animations/motion'
-
+import { motion, AnimatePresence } from 'framer-motion'
+import { pageContainerVariants, divFlipContainerVariants, divContainerVariants, divFlipHorizontalWithResize, divScaleIn } from '../animations/motion'
+import VerticalUserCarousel from '../components/VerticalUserCarousel'
+import DataLoader from '../components/DataLoader'
 
 
 const HomePage = () => {
 
 
+    const { users, usersDataLoading } = useSelector(state => state.users)
+    const { logged } = useSelector(state => state.userData)
+
 
 
     return (
+
         <motion.div className="home-page"
             variants={pageContainerVariants}
             initial='hidden'
@@ -22,12 +27,33 @@ const HomePage = () => {
 
 
 
-            <div className='title-container'>
-                <h1>Swipe right®</h1>
-                <LoginButton />
-                <RegisterButton />
-            </div>
-        </motion.div>
+            <AnimatePresence exitBeforeEnter>
+                <div className='title-container'>
+                    <h1>Swipe right®</h1>
+                    <h2>find your <img src={logo} alt="" /> match</h2>
+                    {!logged ? (<RegisterButton />) : ''}
+                    {!logged ? (<LoginButton />) : ''}
+                </div>
+                {users.length ? (<motion.div className='vertical-sliders-container' variants={divScaleIn}
+                    initial='hidden'
+                    animate='visible'
+                    exit='exit'  >
+
+
+                    <VerticalUserCarousel key={'vertSlider1'} users={users} speed={.1} slideSize={400} imgNum={0} direction={'ttb'} info={true} />
+                    <VerticalUserCarousel key={'vertSlider2'} users={users} speed={0.5} slideSize={100} imgNum={1} direction={'ttb'} />
+
+                    <VerticalUserCarousel key={'vertSlider3'} users={users} speed={.4} slideSize={200} imgNum={2} direction={'ttb'} />
+                    <div className='overlay'>
+                        <h1><span>Newly added users</span></h1>
+                    </div>
+
+
+                </motion.div>) : ''}
+
+            </AnimatePresence>
+        </motion.div >
+
     )
 
 }

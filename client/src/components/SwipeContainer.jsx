@@ -12,7 +12,7 @@ import { divContainerVariants, pageContainerVariants } from '../animations/motio
 
 const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
 
-  const users = useSelector(state => state.users)
+  const { users, usersDataLoading } = useSelector(state => state.users)
   const [characters, setCharacters] = useState(users)
   const dispatch = useDispatch()
   const { logged, userData } = useSelector(state => state.userData)
@@ -35,8 +35,9 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
   }
 
   const sortCharacters = (data) => {
+
     const sortedUsers = data.filter(character => {
-      if (character.gender === userData.interest && character.interest === userData.gender && userData._id !== character._id) {
+      if ((character.gender === userData.interest || userData.interest == 'Everyone') && (character.interest === userData.gender || character.interest == 'Everyone') && userData._id !== character._id) {
         return character
       }
     })

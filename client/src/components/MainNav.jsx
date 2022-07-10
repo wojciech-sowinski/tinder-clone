@@ -38,11 +38,7 @@ const MainNav = () => {
                         Your Profile
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to='/test' >
-                        test
-                    </NavLink>
-                </li>
+
             </ul>
             <div>
                 <NewMessagesCounter />
