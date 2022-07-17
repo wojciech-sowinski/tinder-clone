@@ -24,7 +24,7 @@ const HomePage = () => {
             exit='exit'   >
             <AnimatePresence exitBeforeEnter>
                 <div className='title-container'>
-                    <h1>Matchy Matchy®</h1>
+                    <h1>Matchy Matchy®1</h1>
                     <h2>Find your <img src={logo} alt="" /> match</h2>
                     {!logged ? (<RegisterButton />) : ''}
                     {!logged ? (<LoginButton />) : ''}
