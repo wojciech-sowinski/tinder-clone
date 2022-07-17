@@ -5,6 +5,8 @@ import RegisterButton from './RegisterButton';
 import { login } from '../actions/userActions';
 import { motion, AnimatePresence } from 'framer-motion'
 import { divFlipHorizontalWithResize } from '../animations/motion'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark, faAt, faKey } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -49,7 +51,9 @@ const LoginForm = () => {
 
     return (
         <>
+
             <form onSubmit={submitHandle} id="login-form">
+                <div className='close-button' onClick={() => { dispatch({ type: 'hideModal' }) }}><FontAwesomeIcon icon={faCircleXmark} /></div>
                 <div>
                     <h2>Log In to your account</h2>
                 </div>
@@ -61,7 +65,7 @@ const LoginForm = () => {
                         id="login-email-input"
                         value={loginFormData.email}
                         onChange={inputLoginHandle} />
-                    <span>Email</span>
+                    <span><FontAwesomeIcon icon={faAt} /> Email</span>
                 </div>
                 <div className="input-div">
                     <input
@@ -71,7 +75,7 @@ const LoginForm = () => {
                         required
                         value={loginFormData.password}
                         onChange={inputPasswordHandle} />
-                    <span>Password</span>
+                    <span><FontAwesomeIcon icon={faKey} /> Password</span>
                 </div>
                 <div className="input-div">
                     <input
@@ -83,7 +87,7 @@ const LoginForm = () => {
                 </div>
                 <div>
                     <AnimatePresence>
-                        {resultInfo ? (<motion.h2
+                        {resultInfo ? (<motion.p
                             className='register-info'
 
                             variants={divFlipHorizontalWithResize}
@@ -91,7 +95,7 @@ const LoginForm = () => {
                             animate='visible'
                             exit='exit'>
                             {resultInfo}
-                        </motion.h2>) : ''}
+                        </motion.p>) : ''}
                     </AnimatePresence>
                 </div>
                 <div>

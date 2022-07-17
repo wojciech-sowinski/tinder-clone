@@ -2,19 +2,26 @@ import TinderCard from 'react-tinder-card'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { matchUpdate } from '../actions/userActions'
+import { fetchMessages } from '../actions/messagesActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCakeCandles, faMars, faVenus, faVenusMars, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
-import { motion } from 'framer-motion'
-import { divContainerVariants } from '../animations/motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { divContainerVariants, divContainerFade } from '../animations/motion'
+import DataLoader from './DataLoader'
+
 
 
 const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
 
-  const { users } = useSelector(state => state.users)
+  const { users, usersCatalogLoading } = useSelector(state => state.users)
+  const { messages } = useSelector(state => state.messages)
   const [characters, setCharacters] = useState(users)
   const dispatch = useDispatch()
   const { userData } = useSelector(state => state.userData)
   const [lastDirection, setLastDirection] = useState()
+
+
+
 
   const addMatch = (id) => {
 
@@ -24,6 +31,7 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
       console.log('this match is exists');
     } else {
       dispatch(matchUpdate(userData._id, id))
+      dispatch(fetchMessages())
     }
   }
 
@@ -82,8 +90,7 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
         <div><span>Swipe left to forget</span></div>
         <div>{<FontAwesomeIcon icon={faAnglesLeft} />}</div>
       </div>
-      <div className='cardContainer'
-      >
+      <div className='cardContainer'>
         {sortCharacters(characters).map((character) =>
           <TinderCard
             key={character._id}

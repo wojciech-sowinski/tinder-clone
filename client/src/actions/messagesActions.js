@@ -29,7 +29,7 @@ export const fetchMessages = (prevMessages) => async (dispatch) => {
         type: 'fetchMessages',
         payload: {
             loading: true,
-            messages: prevMessages
+            messages: [...prevMessages]
         }
     })
 

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import config from '../config'
 import { useSelector, useDispatch } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
-import { divContainerVariants, pageContainerVariants } from '../animations/motion'
+import { divContainerVariants, pageContainerVariants, divContainerFade } from '../animations/motion'
+import DataLoader from './DataLoader'
 
 const ChatMatches = ({ setActiveMatch, setOption }) => {
 
@@ -13,7 +14,7 @@ const ChatMatches = ({ setActiveMatch, setOption }) => {
     const [matchesToRender, setMatchesToRender] = useState([])
 
 
-    const matchMessageCounter = (fromId) => {
+    const matchMessageCounter = (fromId, messages) => {
         const messageCounter = messages.filter(message => message.from === fromId && !message.displayed).length
         if (messageCounter) {
             return (
@@ -35,7 +36,7 @@ const ChatMatches = ({ setActiveMatch, setOption }) => {
                             setActiveMatch(match)
                             setOption('chat')
                         }} src={users[users.findIndex((user) => match === user._id)].imgUrl[0]} alt="user image" />
-                        {matchMessageCounter(match)}
+                        {matchMessageCounter(match, messages)}
                         <span className='match-first-name'>{users[users.findIndex((user) => match === user._id)].firstName}</span>
                     </div>
                 )

@@ -41,7 +41,7 @@ router.use(json())
 
 
 router.post('/upload',upload.single("image"), (req,res)=>{
-console.log(req.file);
+
 
     const newImgUrl = req.protocol + '://' + req.get('host') + '/userimgs/' + req.file.filename
     

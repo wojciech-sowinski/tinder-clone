@@ -6,6 +6,7 @@ import DataLoader from '../components/DataLoader'
 import { useDispatch } from 'react-redux';
 import { isLogged } from '../actions/userActions';
 import '../styles/dragAndDrop.scss'
+import config from '../config';
 
 
 function UploadImg() {
@@ -32,7 +33,7 @@ function UploadImg() {
 
         axios({
             method: 'post',
-            url: 'http://localhost:5000/upload',   //addyoururl
+            url: config.serverUrl + '/upload',
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' },
             withCredentials: true

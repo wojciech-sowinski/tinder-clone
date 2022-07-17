@@ -39,7 +39,29 @@ visible: {
     scale:0,
     transition: {
         
-        duration: .3,
+        duration: .2,
+        
+      }
+    
+},}
+export const divScaleInNoResize = {
+    hidden: { 
+   
+    scale:0
+},
+visible: {
+   
+    scale:1,
+    transition: {
+       
+        duration: 1
+      },
+}, exit: {
+   
+    scale:0,
+    transition: {
+        
+        duration: .2,
         
       }
     
@@ -98,11 +120,12 @@ export const divFlipHorizontalWithResize = {
         transform: 'rotateX(90deg)'
 },
     visible: {
-       height:130,
+       height:100,
         transform: 'rotateX(0deg)',
         transition: {
             
-            duration: 0.4
+            duration: 0.4,
+            delay:1
           },
     }, exit: {
         height:0,
@@ -116,6 +139,30 @@ export const divFlipHorizontalWithResize = {
     },
 }
 
+export const divContainerFade = {
+    hidden: { 
+        opacity:0,
+       
+},
+    visible: {
+       opacity:1,
+      
+        transition: {
+            
+            duration: 0.4
+          },
+    }, exit: {
+        opacity:0,
+       
+        transition: {
+            
+            duration: 0.4,
+            delay:.5
+            
+          }
+        
+    },
+}
 
 
 

@@ -5,6 +5,9 @@ import { register } from '../actions/userActions.js'
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { divFlipHorizontalWithResize } from '../animations/motion'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark, faAt, faKey } from '@fortawesome/free-solid-svg-icons'
+
 
 const RegisterForm = () => {
 
@@ -82,6 +85,7 @@ const RegisterForm = () => {
     return (
         <>
             <form onSubmit={handleRegisterSubmit} id="register-form">
+                <div className='close-button' onClick={() => { dispatch({ type: 'hideModal' }) }}><FontAwesomeIcon icon={faCircleXmark} /></div>
                 <div>
                     <h2>Create New Account</h2>
                 </div>
@@ -93,7 +97,7 @@ const RegisterForm = () => {
                         id="register-email-input"
                         value={registerFormData.email}
                         onChange={inputLoginHandle} />
-                    <span>Email</span>
+                    <span><FontAwesomeIcon icon={faAt} /> Email</span>
                 </div>
                 <div className="input-div">
                     <input
@@ -103,7 +107,7 @@ const RegisterForm = () => {
                         required
                         value={registerFormData.password}
                         onChange={inputPasswordHandle} />
-                    <span>Password</span>
+                    <span><FontAwesomeIcon icon={faKey} /> Password</span>
                 </div>
                 <div className="input-div">
                     <input
@@ -113,7 +117,7 @@ const RegisterForm = () => {
                         required
                         value={registerFormData.passwordConfirm}
                         onChange={inputPasswordConfirmHandle} />
-                    <span>Confirm Password</span>
+                    <span><FontAwesomeIcon icon={faKey} /> Confirm Password</span>
                 </div>
                 <div className="input-div">
                     <input
@@ -125,7 +129,7 @@ const RegisterForm = () => {
                 </div>
                 <div>
                     <AnimatePresence>
-                        {resultInfo ? (<motion.h2
+                        {resultInfo ? (<motion.p
                             className='register-info'
                             key={"loadericonskey"}
                             variants={divFlipHorizontalWithResize}
@@ -133,7 +137,7 @@ const RegisterForm = () => {
                             animate='visible'
                             exit='exit'>
                             {resultInfo}
-                        </motion.h2>) : ''}
+                        </motion.p>) : ''}
                     </AnimatePresence>
                 </div>
             </form>

@@ -7,6 +7,7 @@ import ChatContainer from '../components/ChatContainer'
 import MatchedUserPage from "../components/MatchedUserPage";
 import { motion, AnimatePresence } from 'framer-motion'
 import { pageContainerVariants } from '../animations/motion'
+import DataLoader from '../components/DataLoader'
 
 import '../styles/dashboardPage.scss'
 
@@ -16,6 +17,7 @@ const DashboardPage = () => {
     const dispatch = useDispatch()
     const { logged, userData } = useSelector(state => state.userData)
     const [activeMatch, setActiveMatch] = useState(false)
+    const { usersCatalogLoading } = useSelector(state => state.users)
 
     const dashboardPageRender = (logged) => {
 
@@ -35,6 +37,7 @@ const DashboardPage = () => {
                 aboutMe &&
                 email && imgUrl.length) {
                 return <>
+                    {usersCatalogLoading && <DataLoader text={'Loading users'} />}
                     <AnimatePresence exitBeforeEnter>
                         {activeMatch ? <MatchedUserPage key={'matchuserpagekey'} activeMatch={activeMatch} /> : <SwipeContainer key={'swipecontainerkey'} activeMatch={activeMatch} />}
                     </AnimatePresence>
@@ -50,7 +53,7 @@ const DashboardPage = () => {
 
 
     useEffect(() => {
-
+        setActiveMatch(false)
         if (!logged) {
             dispatch({ type: 'showLoginForm' })
         }

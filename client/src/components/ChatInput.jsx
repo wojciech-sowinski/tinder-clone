@@ -6,6 +6,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { motion } from 'framer-motion'
 import { divContainerVariants } from '../animations/motion'
 
+
 const ChatInput = ({ activeMatch }) => {
 
     const messageInitial = {
@@ -41,12 +42,15 @@ const ChatInput = ({ activeMatch }) => {
             exit='exit'
         >
             <form onSubmit={sendMessageHandle}>
+
                 <input type="text" name="chat-input"
                     value={message} onChange={handleChange} />
+
                 <button className="chat-send-btn"><FontAwesomeIcon icon={faEnvelope} /></button>
             </form>
         </motion.div>
     );
 }
+
 
 export default ChatInput;

@@ -36,7 +36,7 @@
     .swipe {
       position: absolute;
       width: 400px;
-      height: 730px;
+      aspect-ratio: 1/1.7;
       padding: 10px;
       display: flex;
       flex-direction: column;
@@ -52,6 +52,7 @@
 
     .cardContainer {
       width: 400px;
+      aspect-ratio: 1/1.7;
       display: flex;
       justify-content: center;
     }
@@ -123,7 +124,7 @@
       background-color: #fff;
       width: 80vw;
       max-width: 380px;
-      height: 40vh;
+      aspect-ratio: 1/1;
 
       background-size: cover;
       background-position: center;
@@ -164,15 +165,15 @@
   .chat-container {
     width: 30%;
     min-width: 300px;
-    max-height: 80vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
 
     .chat-innput-container {
       background: linear-gradient(
         45deg,
-        rgba(201, 0, 50, 0.7),
-        rgba(255, 174, 0, 0.7)
+        rgba(201, 0, 50, 1),
+        rgba(255, 174, 0, 1)
       );
 
       border: 1px solid rgb(201, 201, 201);
@@ -248,8 +249,8 @@
       padding: 5px;
       background: linear-gradient(
         45deg,
-        rgba(201, 0, 50, 0.7),
-        rgba(255, 174, 0, 0.7)
+        rgba(201, 0, 50, 1),
+        rgba(255, 174, 0, 1)
       );
 
       color: #fff;
@@ -407,64 +408,60 @@
       }
     }
   }
+}
 
-  //animations
+@media (max-width: 1024px) {
+  .dashboard-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column-reverse;
+    padding: 5px;
 
-  //   @-webkit-keyframes scale-in-center {
-  //     0% {
-  //       -webkit-transform: scale(0);
-  //       transform: scale(0);
-  //       opacity: 1;
-  //     }
+    .chat-container {
+      width: 100%;
+      max-height: calc(100vh - 50px);
+    }
+    .matched-user-page {
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+    .swipe-container {
+      flex-direction: column;
+      margin: 0 0;
+      align-items: center;
+      padding: 5px;
+      width: 100%;
+      aspect-ratio: 1/1.7;
+      .swipe-info-left,
+      .swipe-info-right {
+        height: auto;
+        display: flex;
+        flex-direction: row-reverse;
 
-  //     100% {
-  //       -webkit-transform: scale(1);
-  //       transform: scale(1);
-  //       opacity: 1;
-  //     }
-  //   }
-
-  //   @keyframes scale-in-center {
-  //     0% {
-  //       -webkit-transform: scale(0);
-  //       transform: scale(0);
-  //       opacity: 1;
-  //     }
-
-  //     100% {
-  //       -webkit-transform: scale(1);
-  //       transform: scale(1);
-  //       opacity: 1;
-  //     }
-  //   }
-
-  //   @keyframes popup {
-  //     0% {
-  //       transform: scale(0, 1);
-  //     }
-
-  //     10% {
-  //       transform: scale(1.1, 1.1);
-  //     }
-
-  //     30% {
-  //       transform: scale(0.9, 0.9);
-  //     }
-
-  //     50% {
-  //       transform: scale(1, 1);
-  //     }
-
-  //     57% {
-  //       transform: scale(1, 1);
-  //     }
-
-  //     64% {
-  //       transform: scale(1, 1);
-  //     }
-
-  //     100% {
-  //       transform: scale(1, 1);
-  //     }
-  //   }
+        justify-content: center;
+        align-items: center;
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        z-index: -1;
+        span {
+          width: 100%;
+        }
+      }
+      .cardContainer {
+        position: relative;
+        width: 300px;
+        aspect-ratio: 1/1.7;
+        .swipe {
+          width: 300px;
+          aspect-ratio: 1/1.7;
+          .card {
+            width: 100%;
+            aspect-ratio: 1/1;
+          }
+        }
+      }
+    }
+  }
 }

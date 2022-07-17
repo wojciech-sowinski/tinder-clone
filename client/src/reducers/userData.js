@@ -35,14 +35,7 @@ const userData = (state = initialState, action) => {
                     return initialState
                 }
                 case 'logOut':
-                    const requestOptions = {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        credentials: 'include'
-                    };
-                    fetch(config.serverUrl + "logout", requestOptions)
+                   
                     return initialState
                 default:
                     return state;

@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { motion, AnimatePresence } from 'framer-motion'
+import { divScaleInNoResize, divFlipHorizontalWithResize } from '../animations/motion'
+
 
 const NewMessagesCounter = () => {
 
@@ -20,14 +23,21 @@ const NewMessagesCounter = () => {
 
     return (
         <>
-            {newMessages != 0 && logged ? (
-                <Link to='/dashboard' className="new-message-counter">
-                    <div >
-                        <span>{newMessages}</span>
-                        <FontAwesomeIcon icon={faEnvelope} />
-                    </div>
-                </Link>
-            ) : ''}
+            <AnimatePresence >
+
+                {newMessages != 0 && logged ? (<motion.div variants={divScaleInNoResize}
+                    initial='hidden'
+                    animate='visible'
+                    exit='exit' >
+                    <Link to='/dashboard' className="new-message-counter">
+                        <div >
+                            <FontAwesomeIcon icon={faEnvelope} />
+                            <span>{newMessages}</span>
+                        </div>
+                    </Link> </motion.div>
+                ) : ''}
+
+            </AnimatePresence>
         </>
 
     );

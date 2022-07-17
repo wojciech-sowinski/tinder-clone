@@ -33,8 +33,8 @@ function App() {
   const { messages } = useSelector(state => state.messages)
   const dispatch = useDispatch()
 
-  useEffect(() => {
 
+  useEffect(() => {
     dispatch(isLogged())
     dispatch(fetchUsersCatalog())
     dispatch(fetchNewMessageCount())
@@ -51,8 +51,9 @@ function App() {
     }
   }, [logged, newMessages])
 
+
   return (
-    <Router>
+    <Router basename={'/matchymatchy/'}>
       <div className="App" >
         {
           showModal && < LoginRegisterModal />

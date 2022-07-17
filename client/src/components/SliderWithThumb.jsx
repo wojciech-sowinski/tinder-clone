@@ -90,9 +90,9 @@ const SliderWithThumb = ({ userImages, editable }) => {
                             cover: true,
                             isNavigation: true,
                             breakpoints: {
-                                600: {
-                                    fixedWidth: 60,
-                                    fixedHeight: 44,
+                                1024: {
+                                    fixedWidth: 100,
+                                    fixedHeight: 100,
                                 }
                             }
                         }

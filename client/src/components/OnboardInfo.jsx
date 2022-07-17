@@ -25,7 +25,7 @@ const OnboardInfo = () => {
     return (
         <div className="onboard-info">
             <img src={blankimg} alt="blank user img" />
-            <h2>To use the dashboard, you must complete your profile.</h2>
+            <span>To use the dashboard, you must complete your profile.</span>
             <button onClick={() => { navigate('/onboard') }} className='redirect-button'>Redirect in {counter}s</button>
         </div>
     );

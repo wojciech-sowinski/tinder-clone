@@ -5,7 +5,7 @@ const LogInInfo = () => {
     return (
         <>
             <div className="login-info">
-                <div><h2>You must be logged in.</h2></div>
+                <div><span>You must be logged in.</span></div>
                 <div>
                     <LoginButton />
                 </div>

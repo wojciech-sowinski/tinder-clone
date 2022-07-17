@@ -7,6 +7,8 @@ import { userDataUpdate } from "../actions/userActions";
 import { motion } from 'framer-motion'
 import { pageContainerVariants } from '../animations/motion'
 import SliderWithThumb from "../components/SliderWithThumb";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 
 const OnBoardPage = () => {
@@ -210,7 +212,7 @@ const OnBoardPage = () => {
                                 name="aboutMe"
                                 value={formData.aboutMe}>
                             </textarea>
-                            <p className="character-left-info">  {formData.aboutMe.length ? `(${200 - formData.aboutMe.length} character left)` : ""} </p>
+                            <p className="character-left-info">  {formData.aboutMe.length ? `(${200 - formData.aboutMe.length} characters left)` : ""} </p>
                         </div>
                     </div>
                     <div className="second-col">
@@ -218,6 +220,12 @@ const OnBoardPage = () => {
                             <label>Profile Photos</label>
                         </div>
                         <div>
+                            <span>
+                                <FontAwesomeIcon icon={faStar} style={{ color: 'rgb(255, 174, 0)' }} /> The first photo added will be the main photo.
+                            </span>
+                        </div>
+                        <div>
+
                             {<UploadImg />}
                         </div>
                         <div>

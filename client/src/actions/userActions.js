@@ -3,27 +3,38 @@ from "axios";
 
 import config from "../config";
 
+
+export const logOut =()=> async (dispatch)=>{
+
+    try {
+        await axios.get(config.serverUrl + "logout",{
+            withCredentials: true
+        })
+        .then(response=>{
+            if(response.status===200){
+                dispatch({type:'logOut'})
+                dispatch(isLogged())
+            }
+        })
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
 export const register=(registerData) => async  (dispatch)=>{
-
-    
-    
-
     try {
         const response = await axios.post(config.serverUrl + 'register', registerData, {
             withCredentials: true
         })
-        
-        if (response.status == 200) {
-            
-                
-                
+        if (response.status == 200) {     
             if (response.data.result === "account created") {
 
                     dispatch({type:'register',payload:'Congratulations. Your account has been created. Before you can use it, you must log in.'})
                     setTimeout(() => {
                         dispatch({ type: 'register', payload: '' })
-        
-                    }, 2000);
+                    }, 10000);
                     setTimeout(() => {
                         dispatch({type:'showLoginForm'})
                     }, 3000);               
@@ -33,7 +44,7 @@ export const register=(registerData) => async  (dispatch)=>{
                 setTimeout(() => {
                     dispatch({ type: 'register', payload: '' })
     
-                }, 2000);
+                }, 10000);
             }
         }else{
             console.log('register failed');
@@ -50,13 +61,11 @@ export const register=(registerData) => async  (dispatch)=>{
 
 }
 
-export const login =(loginData)=> async (dispatch) =>{    
-    
+export const login =(loginData)=> async (dispatch) =>{
     try {
         const response = await axios.post(config.serverUrl + 'login', loginData, {
             withCredentials: true
         })
-        
         if (response.status == 200) {
             if(response.data.logged){
                 dispatch(isLogged())
@@ -70,7 +79,7 @@ export const login =(loginData)=> async (dispatch) =>{
                         type: 'login',
                         payload: {...response.data,resultInfo:''}
                     })  
-                }, 2000);
+                }, 10000);
             }
         }
 
@@ -78,9 +87,7 @@ export const login =(loginData)=> async (dispatch) =>{
 
     } catch (error) {
         console.log(error);
-        
     }
-
 }
 
 
@@ -143,6 +150,7 @@ export const userDataUpdate = (dataToUpd) => async (dispatch) =>{
 }
 
 export const isLogged = () => async (dispatch) => {
+    
     dispatch({
         type: 'userDataLoading',
         payload: true
@@ -154,6 +162,7 @@ export const isLogged = () => async (dispatch) => {
         })
 
         if (response.status == 200) {
+            
             dispatch({
                 type: 'isLogged',
                 payload: response.data

@@ -14,11 +14,11 @@ export const fetchUsersCatalog = () => async (dispatch)=>{
         const response = await axios.get(config.serverUrl + 'users')
         
         if (response.status == 200) {
-            setTimeout(() => {
+           
                 
             dispatch({type:'fetchUsersCatalog',payload:{users:response.data,usersCatalogLoading:false}})
             
-            }, 3000);
+         
             
            
             }

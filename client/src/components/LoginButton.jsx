@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import '../styles/loginForm.scss'
+import { logOut } from '../actions/userActions';
 
 const LoginButton = () => {
 
@@ -10,7 +11,7 @@ const LoginButton = () => {
         if (!logged) {
             dispatch({ type: 'showLoginForm' })
         } else {
-            dispatch({ type: 'logOut' })
+            dispatch(logOut())
         }
     }
 

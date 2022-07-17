@@ -21,6 +21,7 @@ const AnimationRoutes = () => {
                     <Route path='/' element={<HomePage />} />
                     <Route path='/dashboard' element={<DashboardPage />} />
                     <Route path='/onboard' element={<OnBoardPage />} />
+                    <Route path='*' element={<HomePage />} />
                 </Routes>
             </AnimatePresence>
         </>
