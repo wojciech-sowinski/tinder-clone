@@ -31,6 +31,9 @@ const schema = new mongoose.Schema({
     matches: {
         type: [String]
     },
+    forgotten: {
+        type: [String]
+    },
     created: {
         type: Date,
         default: Date.now

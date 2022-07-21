@@ -1,7 +1,7 @@
 import axios
 from "axios";
 import {
-    useDispatch
+    useDispatch,useSelector
 } from "react-redux";
 import config from "../config";
 
@@ -23,13 +23,12 @@ export const sendMessage = (msg) => async (dispatch) => {
 }
 
 
-export const fetchMessages = (prevMessages) => async (dispatch) => {
-
+export const fetchMessages = () => async (dispatch) => {
+    
     dispatch({
         type: 'fetchMessages',
         payload: {
-            loading: true,
-            messages: [...prevMessages]
+            loading: true
         }
     })
 
@@ -38,7 +37,6 @@ export const fetchMessages = (prevMessages) => async (dispatch) => {
     })
 
     if (resolve.status == 200) {
-        
 
             dispatch({
                 type: 'fetchMessages',
@@ -51,7 +49,10 @@ export const fetchMessages = (prevMessages) => async (dispatch) => {
     }
 }
 
+let initialCounter = 0
+
 export const fetchNewMessageCount = () => async (dispatch) => {
+
 
     try {
         const resolve = await axios.get(config.serverUrl + 'newmsgs', {
@@ -62,6 +63,12 @@ export const fetchNewMessageCount = () => async (dispatch) => {
                 type: 'fetchNewMessageCount',
                 payload: resolve.data
             })
+            if(resolve.data!=initialCounter){
+               
+                dispatch(fetchMessages())
+                initialCounter=resolve.data
+            }
+            
         } else {
             dispatch({
                 type: 'fetchNewMessageCount',
@@ -78,12 +85,13 @@ export const fetchNewMessageCount = () => async (dispatch) => {
 export const msgDisplayed = (from, to) => async (dispatch) => {
   
     try {
-        axios.post(config.serverUrl + 'msgdisplayed', {
+        const resolve = axios.post(config.serverUrl + 'msgdisplayed', {
             from,
             to
         }, {
             withCredentials: true
         })
+       
     } catch (error) {
         console.log(error);
     }

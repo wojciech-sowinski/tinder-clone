@@ -6,7 +6,8 @@ const initialState ={
 const messages = (state = initialState, action) => {
     switch (action.type) {
         case 'fetchMessages':
-            return action.payload;
+           
+            return {...state,...action.payload};
         case 'sendMessage':         
             return {
                 ...state,

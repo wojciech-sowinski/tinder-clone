@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { msgDisplayed } from '../actions/messagesActions'
 import { motion } from 'framer-motion'
 import { divContainerVariants } from '../animations/motion'
+import {fetchMessages} from '../actions/messagesActions'
 
 const ChatMessages = ({ activeMatch }) => {
 
@@ -11,15 +12,21 @@ const ChatMessages = ({ activeMatch }) => {
     const { messages } = useSelector(state => state.messages)
     const dispatch = useDispatch()
     const [msgsToRender, setMsgsToRender] = useState(messages)
-
+    const newMessages = useSelector(state => state.newMessages)
+   
 
     useEffect(() => {
+        
         setMsgsToRender(messages)
+       
+        dispatch(msgDisplayed(activeMatch, userData._id))
+        
+        
         return () => {
             setMsgsToRender([])
-            dispatch(msgDisplayed(activeMatch, userData._id))
+            
         }
-    }, [messages])
+    }, [messages,newMessages])
 
 
 

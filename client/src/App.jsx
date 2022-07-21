@@ -34,22 +34,25 @@ function App() {
   const dispatch = useDispatch()
 
 
+
   useEffect(() => {
+    
     dispatch(isLogged())
     dispatch(fetchUsersCatalog())
     dispatch(fetchNewMessageCount())
-    dispatch(fetchMessages(messages))
-
+    dispatch(fetchMessages())
     const appInterval = setInterval(() => {
       if (logged) {
+       
         dispatch(fetchNewMessageCount())
+               
       }
     }, 3000);
 
     return () => {
       clearInterval(appInterval)
     }
-  }, [logged, newMessages])
+  }, [logged])
 
 
   return (

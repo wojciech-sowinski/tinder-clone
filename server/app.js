@@ -3,17 +3,8 @@ const cookieSession = require('cookie-session')
 const express = require('express')
 const cors = require("cors");
 const config = require('./config')
-// const fs = require('fs')
 const path = require('path')
-// const multer  = require('multer');
-// const formidableMiddleware = require('express-formidable')
-// const {GridFsStorage} = require('multer-gridfs-storage');
-// const Grid = require('gridfs-stream')
-// const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
-
-
-
 
 
 //routes
