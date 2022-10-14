@@ -1,13 +1,13 @@
 import TinderCard from 'react-tinder-card'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { matchUpdate } from '../actions/userActions'
-import { fetchMessages } from '../actions/messagesActions'
+import { matchUpdate,forgott } from '../actions/userActions'
+import { sendMessage } from '../actions/messagesActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCakeCandles, faMars, faVenus, faVenusMars, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import { divContainerVariants, divContainerFade } from '../animations/motion'
-import DataLoader from './DataLoader'
+
 
 
 
@@ -28,17 +28,28 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
     const userMatches = [...userData.matches]
 
     if (userMatches.findIndex((match) => match === id) > -1) {
-      console.log('this match is exists');
+      
     } else {
       dispatch(matchUpdate(userData._id, id))
-      dispatch(fetchMessages())
+      dispatch(sendMessage({
+        from: userData._id,
+        to: id,
+        body: "Hey, I match you. Let's talk :)"
+    }))
+      
     }
   }
 
   const sortCharacters = (data) => {
+ 
 
     const sortedUsers = data.filter(character => {
-      if ((character.gender === userData.interest || userData.interest == 'Everyone') && (character.interest === userData.gender || character.interest == 'Everyone') && userData._id !== character._id) {
+      // console.log(!userData.matches.findIndex(match=>match!=character._id),character.firstName);
+// console.log(userData);
+
+
+
+      if ((character.gender === userData.interest || userData.interest == 'Everyone') && (character.interest === userData.gender || character.interest == 'Everyone') && userData._id !== character._id && userData.matches?.findIndex(match=>match===character._id)===-1 && userData.forgotten?.findIndex(match=>match===character._id)===-1) {
         return character
       }
     })
@@ -60,10 +71,13 @@ const SwipeContainer = ({ activeMatch, setActiveMatch }) => {
   }
 
   const swiped = (direction, nameToDelete) => {
-
+    
     setLastDirection(direction)
     if (direction === 'right') {
       addMatch(nameToDelete)
+    }else if(direction ==='left'){
+     
+      dispatch(forgott(nameToDelete))
     }
   }
 

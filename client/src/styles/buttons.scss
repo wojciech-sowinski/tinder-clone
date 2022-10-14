@@ -33,6 +33,10 @@
   cursor: pointer;
 }
 
+button.submit-button.green-button{
+  background: rgb(0, 201, 23);
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;

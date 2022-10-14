@@ -7,9 +7,6 @@ const path = require('path')
 const bodyParser = require('body-parser')
 
 
-
-
-
 //routes
 const router = express.Router()
 
@@ -36,8 +33,8 @@ mongoose.connect(mongoDbUrl)
 
 
 const corsOption = {
-    origin: 'http://localhost:3000',
-    // origin: 'http://owliedev.pl',
+    // origin: 'http://localhost:3000',
+    origin: 'http://owliedev.pl',
     credentials: true
 }
 

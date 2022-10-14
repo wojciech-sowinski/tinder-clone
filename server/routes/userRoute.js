@@ -124,6 +124,7 @@ router.get('/islogged', (req, res) => {
             aboutMe: 1,
             email: 1,
             matches: 1,
+            forgotten: 1,
             birthDate: 1
         }, (err, data) => {
             if (err) {
@@ -219,24 +220,25 @@ router.post('/matchupd', (req, res) => {
                 if (err) {
                     console.log(err);
                     
-                } else {
-                    const message = new Message({
-                        from: userId,
-                        to: matchId,
-                        body: "Hey, I match you. Let's talk :)"
-                    })
+                } 
+                // else {
+                //     const message = new Message({
+                //         from: userId,
+                //         to: matchId,
+                //         body: "Hey, I match you. Let's talk :)"
+                //     })
                     
-                    message.save((err, result) => {
-                        if (err) {
-                            console.log('message save ');
+                //     message.save((err, result) => {
+                //         if (err) {
+                //             console.log('message save ');
                             
                             
-                        } else {
-                            console.log('message save to db');
+                //         } else {
+                //             console.log('message save to db');
                             
-                        }
-                    })
-                }
+                //         }
+                //     })
+                // }
                 
                 
             })
@@ -244,6 +246,34 @@ router.post('/matchupd', (req, res) => {
             
         })
     }
+})
+
+router.post('/forgotten',(req,res)=>{
+    const {
+        characterId
+    } = req.body
+
+    if (req.session.authToken) {
+
+console.log(req.body);
+
+User.findByIdAndUpdate(req.session.authToken,{
+    $push: {
+        forgotten: characterId
+    }},(err,data)=>{
+        if(err){
+            console.log(err);
+        }else{
+        res.end()
+        }
+    })
+
+
+
+    }
+    res.end()
+
+
 })
 
 module.exports = router

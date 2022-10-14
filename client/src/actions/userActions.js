@@ -2,6 +2,7 @@ import axios
 from "axios";
 
 import config from "../config";
+import { fetchMessages } from "./messagesActions";
 
 
 export const logOut =()=> async (dispatch)=>{
@@ -181,7 +182,24 @@ export const isLogged = () => async (dispatch) => {
 
 }
 
+export const forgott = (characterId)=> async (dispatch) =>{
+    try {
 
+        await axios.post(config.serverUrl + 'forgotten', {
+            characterId
+        }, {
+            withCredentials: true
+        })
+        .then(resolve=>{
+            if(resolve.status===200){
+                dispatch(isLogged())
+            }
+        })
+        
+    } catch (error) {
+        
+    }
+}
 
 export const matchUpdate = (userId, matchId) => async (dispatch) => {
     
@@ -196,12 +214,15 @@ export const matchUpdate = (userId, matchId) => async (dispatch) => {
             })
             .then(resolve => {
                 if (resolve.status == 200) {
-                    console.log(resolve);
+                   
 
                     dispatch({
                         type: 'matchUpdate'
                     })
                     dispatch(isLogged())
+                       dispatch(fetchMessages())
+                   
+                    
 
                 }
             })

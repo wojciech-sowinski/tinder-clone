@@ -9,11 +9,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { pageContainerVariants } from '../animations/motion'
 import DataLoader from '../components/DataLoader'
 
+
 import '../styles/dashboardPage.scss'
 
 
 const DashboardPage = () => {
 
+    
     const dispatch = useDispatch()
     const { logged, userData } = useSelector(state => state.userData)
     const [activeMatch, setActiveMatch] = useState(false)
@@ -26,7 +28,8 @@ const DashboardPage = () => {
             gender,
             interest,
             aboutMe,
-            email, imgUrl
+            email, 
+            imgUrl
         } = userData
 
         if (logged) {
@@ -53,6 +56,8 @@ const DashboardPage = () => {
 
 
     useEffect(() => {
+       
+
         setActiveMatch(false)
         if (!logged) {
             dispatch({ type: 'showLoginForm' })

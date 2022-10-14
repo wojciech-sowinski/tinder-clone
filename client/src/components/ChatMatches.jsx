@@ -3,19 +3,24 @@ import config from '../config'
 import { useSelector, useDispatch } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
 import { divContainerVariants, pageContainerVariants, divContainerFade } from '../animations/motion'
-import DataLoader from './DataLoader'
+
+import { fetchMessages } from '../actions/messagesActions'
 
 const ChatMatches = ({ setActiveMatch, setOption }) => {
 
     const { userData } = useSelector(state => state.userData)
     const { messages } = useSelector(state => state.messages)
     const { users } = useSelector(state => state.users)
+    const newMessages = useSelector(state => state.newMessages)
+
+    const dispatch =useDispatch()
 
     const [matchesToRender, setMatchesToRender] = useState([])
 
 
     const matchMessageCounter = (fromId, messages) => {
         const messageCounter = messages.filter(message => message.from === fromId && !message.displayed).length
+      
         if (messageCounter) {
             return (
                 <span className='match-new-messages'>{messageCounter}</span>
@@ -26,6 +31,7 @@ const ChatMatches = ({ setActiveMatch, setOption }) => {
     }
 
     const renderUserMatches = () => {
+        
         if (users.length) {
             const userMatches = [...userData.matches]
             const matches = userMatches.map((match) => {
@@ -46,8 +52,12 @@ const ChatMatches = ({ setActiveMatch, setOption }) => {
     }
 
     useEffect(() => {
+    
         renderUserMatches()
-    }, [users, messages, userData])
+
+      
+     
+    }, [users, messages, userData,newMessages])
 
     return (
         <motion.div

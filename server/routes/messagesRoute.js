@@ -112,7 +112,7 @@ router.post('/msgdisplayed', (req, res) => {
         }).exec((err, result) => {
             console.log(result);
 
-
+           res.end()
         })
 
         res.end()
