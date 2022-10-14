@@ -33,8 +33,8 @@ mongoose.connect(mongoDbUrl)
 
 
 const corsOption = {
-    // origin: 'http://localhost:3000',
-    origin: 'http://owliedev.pl',
+    origin: 'http://localhost:3000',
+    // origin: 'http://owliedev.pl',
     credentials: true
 }
 
@@ -66,10 +66,6 @@ app.use('/',cors(corsOption),userRoute)
 app.use('/',cors(corsOption),usersRoute)
 
 app.get('/userimgs/:name',cors(corsOption),(req,res)=>{
-
-    // if (req.session.authToken&&req.params.name){
-        
-    // }
     
     res.sendFile(path.join(__dirname,'./userimgs', req.params.name))
 
