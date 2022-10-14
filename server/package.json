@@ -1,8 +1,11 @@
 {
-  "name":"Tinder-Clone",
+  "name": "Tinder-Clone",
   "main": "app.js",
-  "engines":{
-    "node":"14.x"
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
