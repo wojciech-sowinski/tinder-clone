@@ -7,9 +7,6 @@ const path = require('path')
 const bodyParser = require('body-parser')
 
 
-
-
-
 //routes
 const router = express.Router()
 
@@ -69,10 +66,6 @@ app.use('/',cors(corsOption),userRoute)
 app.use('/',cors(corsOption),usersRoute)
 
 app.get('/userimgs/:name',cors(corsOption),(req,res)=>{
-
-    // if (req.session.authToken&&req.params.name){
-        
-    // }
     
     res.sendFile(path.join(__dirname,'./userimgs', req.params.name))
 
