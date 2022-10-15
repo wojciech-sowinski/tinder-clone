@@ -34,12 +34,12 @@ mongoose.connect(mongoDbUrl)
 
 const corsOption = {
     // origin: 'http://localhost:3000',
-    origin: 'http://owliedev.pl',
+    // origin: 'http://owliedev.pl',
     credentials: true
 }
 
 //middleware
-app.use(cors());
+app.use(cors(corsOption));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", req.header('Origin'));
     res.header("Access-Control-Allow-Credentials", true);
@@ -60,19 +60,17 @@ app.use(cookieSession({
     maxAge: cookieMaxAge
 }))
 
-app.use('/',cors(),uploadRoute)
-app.use('/',cors(),messagesRoute)
-app.use('/',cors(),userRoute)
-app.use('/',cors(),usersRoute)
+app.use('/',cors(corsOption),uploadRoute)
+app.use('/',cors(corsOption),messagesRoute)
+app.use('/',cors(corsOption),userRoute)
+app.use('/',cors(corsOption),usersRoute)
 
-app.get('/userimgs/:name',cors(),(req,res)=>{
+app.get('/userimgs/:name',cors(corsOption),(req,res)=>{
     
     res.sendFile(path.join(__dirname,'./userimgs', req.params.name))
 
 }
 )
 
-app.get('/',(req,res)=>{
-    res.send('app is working')
-})
+
 
