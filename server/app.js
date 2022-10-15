@@ -72,4 +72,7 @@ app.get('/userimgs/:name',cors(corsOption),(req,res)=>{
 }
 )
 
+app.get('/',(req,res)=>{
+    res.send('app is working')
+})
 
