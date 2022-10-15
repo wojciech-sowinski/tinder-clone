@@ -34,7 +34,7 @@ mongoose.connect(mongoDbUrl)
 
 const corsOption = {
     // origin: 'http://localhost:3000',
-    origin: 'http://owliedev.pl/matchymatchy/',
+    origin: 'http://owliedev.pl',
     credentials: true
 }
 
