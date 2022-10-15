@@ -39,7 +39,7 @@ const corsOption = {
 }
 
 //middleware
-app.use(cors(corsOption));
+app.use(cors());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", req.header('Origin'));
     res.header("Access-Control-Allow-Credentials", true);
@@ -60,12 +60,12 @@ app.use(cookieSession({
     maxAge: cookieMaxAge
 }))
 
-app.use('/',cors(corsOption),uploadRoute)
-app.use('/',cors(corsOption),messagesRoute)
-app.use('/',cors(corsOption),userRoute)
-app.use('/',cors(corsOption),usersRoute)
+app.use('/',cors(),uploadRoute)
+app.use('/',cors(),messagesRoute)
+app.use('/',cors(),userRoute)
+app.use('/',cors(),usersRoute)
 
-app.get('/userimgs/:name',cors(corsOption),(req,res)=>{
+app.get('/userimgs/:name',cors(),(req,res)=>{
     
     res.sendFile(path.join(__dirname,'./userimgs', req.params.name))
 
