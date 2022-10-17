@@ -60,8 +60,8 @@ app.use(cookieSession({
     name: cookieSessionName,
     keys: cookieKeys,
     maxAge: cookieMaxAge,
-    sameSite: 'none',
-    secure: true,
+    // sameSite: 'none',
+    // secure: true,
 
 }))
 
