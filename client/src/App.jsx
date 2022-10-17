@@ -36,16 +36,16 @@ function App() {
 
 
   useEffect(() => {
-    
+
     dispatch(isLogged())
     dispatch(fetchUsersCatalog())
     dispatch(fetchNewMessageCount())
     dispatch(fetchMessages())
     const appInterval = setInterval(() => {
       if (logged) {
-       
+
         dispatch(fetchNewMessageCount())
-               
+
       }
     }, 3000);
 
@@ -54,9 +54,9 @@ function App() {
     }
   }, [logged])
 
-
+  // basename={'/matchymatchy/'}
   return (
-    <Router basename={'/matchymatchy/'}>
+    <Router >
       <div className="App" >
         {
           showModal && < LoginRegisterModal />
