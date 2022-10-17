@@ -7,8 +7,6 @@ const Message = require('../models/message')
 
 
 router.post('/deluserimg',(req,res)=>{
-
-       
     
     if (req.session.authToken) {
         const file = path.parse(req.body.filePath)
@@ -51,7 +49,6 @@ router.post('/deluserimg',(req,res)=>{
 })
 
 router.post('/register', (req, res) => {
-    console.log(req.body)
     const userExistsFind = User.findOne({
         email: req.body.email
     })
