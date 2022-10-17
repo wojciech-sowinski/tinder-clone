@@ -56,7 +56,7 @@ app.use(cookieSession({
     name: cookieSessionName,
     keys: cookieKeys,
     maxAge: cookieMaxAge,
-//     httpOnly: true,
+    httpOnly: true,
 //   sameSite: "None",
 //   secure: true,
 
