@@ -33,7 +33,7 @@ mongoose.connect(mongoDbUrl)
 
 
 const corsOption = {
-    origin: 'https://tinder-clone-client-kfpz5s8a8-wojciech-sowinski.vercel.app/',
+    origin: 'https://tinder-clone-client-kfpz5s8a8-wojciech-sowinski.vercel.app',
     // origin: 'http://owliedev.pl',
     credentials: true,
     
@@ -42,7 +42,7 @@ const corsOption = {
 //middleware
 app.use(cors(corsOption));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
     res.header("Access-Control-Allow-Credentials", true);
     res.header(
       "Access-Control-Allow-Headers",
