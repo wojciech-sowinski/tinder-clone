@@ -42,7 +42,7 @@ const corsOption = {
 //middleware
 app.use(cors(corsOption));
 app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin','*');
+    res.setHeader('Access-Control-Allow-Origin','https://tinder-clone-client-kfpz5s8a8-wojciech-sowinski.vercel.app');
     res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
     res.setHeader('Access-Control-Allow-Methods','Content-Type','Authorization');
     
@@ -56,9 +56,9 @@ app.use(cookieSession({
     name: cookieSessionName,
     keys: cookieKeys,
     maxAge: cookieMaxAge,
-    httpOnly: false,
-//   sameSite: "None",
-//   secure: true,
+    // httpOnly: false,
+  sameSite: "None",
+  secure: true,
 
 }))
 
