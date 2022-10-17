@@ -160,7 +160,8 @@ export const isLogged = () => async (dispatch) => {
     try {
 
         const response = await axios.get(config.serverUrl + 'isLogged', {
-            withCredentials: true
+            headers: {"Access-Control-Allow-Origin": "*"},
+            withCredentials: true,
         })
 
         if (response.status == 200) {
