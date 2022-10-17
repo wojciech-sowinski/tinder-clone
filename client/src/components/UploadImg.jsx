@@ -31,7 +31,7 @@ function UploadImg() {
         const formData = new FormData();
         formData.append('image', compressedFile);
 
-        axios.post(config.serverUrl + 'upload', {
+        axios.post(config.serverUrl + 'upload1', {
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' },
             withCredentials: true
