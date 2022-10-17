@@ -58,7 +58,10 @@ app.use(express.json())
 app.use(cookieSession({
     name: cookieSessionName,
     keys: cookieKeys,
-    maxAge: cookieMaxAge
+    maxAge: cookieMaxAge,
+    secure: true,
+    sameSite: 'none',
+
 }))
 
 
