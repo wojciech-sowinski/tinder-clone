@@ -36,8 +36,7 @@ const corsOption = {
     origin: 'https://tinder-clone-client-kfpz5s8a8-wojciech-sowinski.vercel.app',
     // origin: 'http://owliedev.pl',
     credentials: true,
-    path: "/",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    
 }
 
 //middleware
