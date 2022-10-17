@@ -65,9 +65,8 @@ export const register=(registerData) => async  (dispatch)=>{
 export const login =(loginData)=> async (dispatch) =>{
     try {
         const response = await axios.post(config.serverUrl + 'login', loginData, {
-            withCredentials: true,
-            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'
-    }
+            withCredentials: true
+           
         })
         if (response.status == 200) {
             if(response.data.logged){
