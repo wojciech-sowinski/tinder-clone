@@ -33,7 +33,7 @@ function UploadImg() {
 
         axios({
             method: 'post',
-            url: config.serverUrl + '/upload',
+            url: config.serverUrl + 'upload',
             data: formData,
             headers: { 'Content-type': 'multipart/form-data' },
             withCredentials: true
