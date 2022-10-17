@@ -104,8 +104,8 @@ router.post('/login', (req, res) => {
 
 
             req.session.authToken = data.id
-
-            res.redirect('/islogged')
+res.send({log:true})
+            // res.redirect('/islogged')
 
         } else {
 
