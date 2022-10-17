@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
   });
 
 
-
+  app.set("trust proxy", 1);
 app.use(express.json())
 app.use(cookieSession({
     name: cookieSessionName,
