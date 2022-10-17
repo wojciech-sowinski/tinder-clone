@@ -59,8 +59,7 @@ app.use(cookieSession({
     keys: cookieKeys,
     maxAge: cookieMaxAge
 }))
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-app.config['SESSION_COOKIE_SECURE'] = True
+
 
 app.use('/',cors(corsOption),uploadRoute)
 app.use('/',cors(corsOption),messagesRoute)
