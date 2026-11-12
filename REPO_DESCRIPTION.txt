@@ -1,0 +1,1 @@
+Klon Tindera: React (CRA) + Express/Mongoose/MongoDB, swipe, dopasowania i czat. Projekt deweloperski, nie produkcja.
